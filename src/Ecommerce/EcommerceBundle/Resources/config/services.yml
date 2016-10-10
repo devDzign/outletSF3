@@ -37,11 +37,11 @@ services:
         factory: ["@form.factory",createNamed]
         arguments:
             - test
-            - UtilisateursAdressesType::classs
+            - former
     utilisateurs_adresses_type:
         class: "%utilisateurs_adresses_type.class%"
         tags:
-            - { name: form.type, alias: form }
+            - { name: form.type, alias: former }
     utilisateurs_adresses_handler:
         class: "%utilisateurs_adresses_handler.class%"
 #        arguments: ["@userad_form","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage"]
