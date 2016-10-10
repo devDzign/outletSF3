@@ -1,0 +1,14 @@
+{
+  "name": "vbsf3",
+  "version": "1.0.0",
+  "description": "Automatiser le front-end dans un projet symfony 3",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chabour.dev@gmail.com",
+  "license": "ISC"
+}

@@ -1,0 +1,51 @@
+parameters:
+    produits_manager_service_class: Ecommerce\EcommerceBundle\Services\ProduitsManager
+    panier_manager_service_class: Ecommerce\EcommerceBundle\Services\PanierManager
+    utilisateurs_session_livraison_service.class: Ecommerce\EcommerceBundle\Services\LivraisonOnSession
+    utilisateurs_adresses_handler.class: Ecommerce\EcommerceBundle\Services\UtilisateursAdressesHandler
+    tva_twig_extension_class: Ecommerce\EcommerceBundle\Twig\TvaExtension
+    tva_montant_twig_extension_class: Ecommerce\EcommerceBundle\Twig\TvaTotalExtension
+    redirect_listner_class: Ecommerce\EcommerceBundle\EventListener\RedirectionListener
+    utilisateurs_adresses_type.class: Ecommerce\EcommerceBundle\Form\UtilisateursAdressesType
+    utilisateurs_adresses_entity.class: Ecommerce\EcommerceBundle\Entity\UtilisateursAdresses
+    symfony.form.class: Symfony\Component\Form\Form
+
+services:
+    produits_manager_service:
+        class: "%produits_manager_service_class%"
+        arguments: ["@doctrine.orm.default_entity_manager", "@security.token_storage"]
+    panier_manager_service:
+        class: "%panier_manager_service_class%"
+        arguments: ["@doctrine.orm.default_entity_manager", "@security.token_storage","@request_stack", "@produits_manager_service"]
+    tva_twig_extension:
+        class:  "%tva_twig_extension_class%"
+        arguments: []
+        tags:
+            -  { name: twig.extension }
+    tva_montant_twig_extension:
+        class:  "%tva_montant_twig_extension_class%"
+        arguments: []
+        tags:
+            -  { name: twig.extension }
+    redirect_listner:
+        class:  "%redirect_listner_class%"
+        arguments: ["@security.token_storage", "@router","@panier_manager_service"]
+        tags:
+            -  { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    userad_form:
+        class: "%symfony.form.class%"
+        factory: ["@form.factory",createNamed]
+        arguments:
+            - test
+            - UtilisateursAdressesType::classs
+    utilisateurs_adresses_type:
+        class: "%utilisateurs_adresses_type.class%"
+        tags:
+            - { name: form.type, alias: form }
+    utilisateurs_adresses_handler:
+        class: "%utilisateurs_adresses_handler.class%"
+#        arguments: ["@userad_form","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage"]
+        arguments: ["@form.factory","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage"]
+    utilisateurs_session_livraison_service:
+        class: "%utilisateurs_session_livraison_service.class%"
+        arguments: ["@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@router"]

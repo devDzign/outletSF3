@@ -1,0 +1,31 @@
+{#{% trans_default_domain 'FOSUserBundle' %}#}
+
+{#{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}#}
+    {#{{ form_widget(form) }}#}
+    {#<div>#}
+        {#<input type="submit" value="{{ 'profile.edit.submit'|trans }}" />#}
+    {#</div>#}
+{#{{ form_end(form) }}#}
+
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="span3">
+        {% include 'UserBundle:Default/modulesUsed/layout:utilisateursConnecte.html.twig' %}
+    </div>
+    <div class="span9">
+        <h2>Editer mes informations</h2>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="span4">
+                    <form action="{{ path('fos_user_profile_edit') }}"  method="POST">
+                        {{ form_widget(form) }}
+                        <br />
+                        <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
