@@ -50,9 +50,9 @@ class Commandes
     /**
      * @var array
      *
-     * @ORM\Column(name="produits", type="array")
+     * @ORM\Column(name="commande", type="array")
      */
-    private $produits;
+    private $commande;
 
     /**
      * Get id
@@ -64,6 +64,16 @@ class Commandes
         return $this->id;
     }
 
+    /**
+     * Get valider
+     *
+     * @return boolean
+     */
+    public function getValider()
+    {
+        return $this->valider;
+    }
+    
     /**
      * Set valider
      *
@@ -77,13 +87,13 @@ class Commandes
     }
 
     /**
-     * Get valider
+     * Get date
      *
-     * @return boolean
+     * @return \DateTime
      */
-    public function getValider()
+    public function getDate()
     {
-        return $this->valider;
+        return $this->date;
     }
 
     /**
@@ -99,13 +109,13 @@ class Commandes
     }
 
     /**
-     * Get date
+     * Get reference
      *
-     * @return \DateTime
+     * @return integer
      */
-    public function getDate()
+    public function getReference()
     {
-        return $this->date;
+        return $this->reference;
     }
 
     /**
@@ -121,35 +131,35 @@ class Commandes
     }
 
     /**
-     * Get reference
+     * Get commande
      *
-     * @return integer
+     * @return array
      */
-    public function getReference()
+    public function getCommande()
     {
-        return $this->reference;
+        return $this->commande;
     }
 
     /**
-     * Set produits
+     * Set commande
      *
-     * @param array $produits
+     * @param array $commande
      * @return Commandes
      */
-    public function setProduits($produits)
+    public function setCommande($commande)
     {
-        $this->produits = $produits;
+        $this->commande = $commande;
         return $this;
     }
 
     /**
-     * Get produits
+     * Get utilisateur
      *
-     * @return array
+     * @return User
      */
-    public function getProduits()
+    public function getUtilisateur()
     {
-        return $this->produits;
+        return $this->utilisateur;
     }
 
     /**
@@ -163,15 +173,5 @@ class Commandes
 
         $this->utilisateur = $utilisateur;
         return $this;
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return User
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
     }
 }

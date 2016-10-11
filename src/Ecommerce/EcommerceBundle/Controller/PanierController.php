@@ -140,6 +140,7 @@ class PanierController extends Controller
      */
     public function validationAction(Request $request)
     {
+
         $serviceSession = $this->get('utilisateurs_session_livraison_service');
         if ($request->getMethod() == 'POST') {
             $serviceSession->setLivraisonOnSession();
@@ -152,14 +153,15 @@ class PanierController extends Controller
         $produits    = $em->getRepository('EcommerceBundle:Produits')->findArray(array_keys($session->get('panier')));
         $livraison   = $em->getRepository('EcommerceBundle:UtilisateursAdresses')->find($adresse['livraison']);
         $facturation = $em->getRepository('EcommerceBundle:UtilisateursAdresses')->find($adresse['facturation']);
-        
-        return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig', array('produits' => $produits,
-                                                                                                 'livraison' => $livraison,
-                                                                                                 'facturation' => $facturation,
-                                                                                                 'panier' => $session->get('panier')));
+    
+        return $this->render('EcommerceBundle:Default:panier/layout/validation.html.twig', array(
+                'produits' => $produits,
+                'livraison' => $livraison,
+                'facturation' => $facturation,
+                'panier' => $session->get('panier')
+            )
+        );
     }
     
-    
-
     
 }
