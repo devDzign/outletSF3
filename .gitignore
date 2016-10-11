@@ -18,11 +18,12 @@
 
 # Managed by Composer
 /var/bootstrap.php.cache
-/bin/*
 !bin/console
 !bin/symfony_requirements
 /vendor/
-
+!/var/cache/.gitkeep
+!/var/logs/.gitkeep
+!/var/sessions/.gitkeep
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
@@ -44,5 +45,10 @@ phpunit.phar
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
 
-/var/
 .idea/
+app/DoctrineMigrations/
+web/assets/
+
+
+
+
