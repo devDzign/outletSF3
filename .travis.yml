@@ -1,6 +1,13 @@
 language: php
 php:
     - 7.0.10
+sudo: false
+
+services:
+    - mysql
+cache:
+    directories:
+        - $HOME/.composer/cache/files
 
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
