@@ -8,10 +8,9 @@ cache:
         - $HOME/.composer/cache/files
 
 before_script:
+  - php bin/console cache:clear --no-warmup
+  - composer install --dev --prefer-dist
   - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - sudo chmod -R 777 var/*
-  - composer self-update
-  - composer install
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:create --env=test
   - php bin/console doctrine:fixtures:load -n --env=test
