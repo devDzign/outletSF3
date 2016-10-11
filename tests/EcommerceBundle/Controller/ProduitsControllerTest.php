@@ -10,8 +10,8 @@ class ProduitsControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/produits');
-
-        $this->assertContains('Ajouter au panier', $client->getResponse()->getContent());
+    
+        $this->assertContains('Ajouter', $client->getResponse()->getContent());
     }
 
     public function testProduits2()
@@ -22,7 +22,7 @@ class ProduitsControllerTest extends WebTestCase
 
         $this->assertEquals(
             0,
-            $crawler->filter('html:contains("Hello World")')->count()
+            $crawler->filter('html:contains("All")')->count()
         );
     }
 }
