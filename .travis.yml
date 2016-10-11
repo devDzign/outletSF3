@@ -9,7 +9,7 @@ cache:
 
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
-  - chmod -R 777 var/*
+  - sudo chmod -R 777 var/*
   - composer self-update
   - composer install
   - php bin/console doctrine:database:create --env=test
