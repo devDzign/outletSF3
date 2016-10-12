@@ -21,14 +21,18 @@
                                         <h4>{{ produit.nom }}</h4>
                                         <p>{{ produit.prix | tva(produit.tva.valeur) }} €</p>
                                         <a class="btn btn-primary"
-                                           href="{{ path('presentation', {'idProduit' : produit.id}) }}"><i class="icon-eye-open"></i>
-                                            Plus d'infos</a>
+                                           href="{{ path('presentation', {'idProduit' : produit.id}) }}"><i
+                                                    class="icon-eye-open"></i>{{ 'produits.plus_info'|trans({}, 'EcommerceBundle') }}
+                                        </a>
                                         {% if panier[produit.id] is not defined %}
                                             <a class="btn btn-success"
-                                               href="{{ path('ajouter',{'idProduit': produit.id}) }}"><i class="icon-plus"></i> Ajouter au
-                                                panier</a>
+                                               href="{{ path('ajouter',{'idProduit': produit.id}) }}"><i
+                                                        class="icon-plus"></i>{{ 'produits.ajouter_au_panier'|trans({}, 'EcommerceBundle') }}
+                                            </a>
                                         {% else %}
-                                            <a href="{{ path('panier') }}" class="btn btn-warning"><i class=" icon-shopping-cart"></i> Déja ajouter </a>
+                                            <a href="{{ path('panier') }}" class="btn btn-warning"><i
+                                                        class=" icon-shopping-cart"></i> {{ 'produits.deja_ajouter'|trans({}, 'EcommerceBundle') }}
+                                            </a>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -37,18 +41,11 @@
                     </ul>
 
                     <div class="pagination">
-                        <ul>
-                            <li class="disabled"><span>Précédent</span></li>
-                            <li class="disabled"><span>1</span></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">Suivant</a></li>
-                        </ul>
+                        {{ knp_pagination_render(produits) }} {{ 'produits.nb_produits'|trans({}, 'EcommerceBundle') }}
+                        : {{ produits.getTotalItemCount }}
                     </div>
                 {% else %}
-                    <p class="center-block">Aucun produits disponible</p>
+                    <p class="center-block">{{ 'produits.aucun_produit'|trans({}, 'EcommerceBundle') }}</p>
                 {% endif %}
 
 

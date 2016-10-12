@@ -1,0 +1,10 @@
+produits:
+    nb_produits : Nombre de produits
+    aucun_produit: Aucun produits disponible
+    plus_info: Plus d'info
+    ajouter_au_panier: Ajouter au panier
+    deja_ajouter: Déja vu
+    panier: Panier
+    aucun_article_panier: Aucun article dans votre panier
+    aucun_un_article_panier: article dans votre panier
+    aucun_more_article_panier: articles dans votre panier

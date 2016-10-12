@@ -18,18 +18,23 @@ class ProduitsController extends Controller
      *      name="produits",
      *     )
      */
-    public function produitsAction(Categories $idCategorie= null)
+    public function produitsAction(Request $request, Categories $idCategorie = null)
     {
-        $panierManager = $this->get('panier_manager_service');
-        $produitsManager      = $this->get('produits_manager_service');
-       
-        
-
-        if(null != $idCategorie){
-            
-        }else{
-            $produits      = $produitsManager->getAllProduct();
+        $panierManager   = $this->get('panier_manager_service');
+        $produitsManager = $this->get('produits_manager_service');
+    
+        if (null != $idCategorie) {
+            $produits = $produitsManager->getProductByCategory($idCategorie);
+        } else {
+            $produits = $produitsManager->getAllProduct();
         }
+    
+        $paginator = $this->get('knp_paginator');
+        $produits  = $paginator->paginate(
+            $produits, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $this->getParameter('knp_paginator.page_range')/*limit per page*/
+        );
 
         return $this->render('EcommerceBundle:Default:produits/layout/produits.html.twig',
             [

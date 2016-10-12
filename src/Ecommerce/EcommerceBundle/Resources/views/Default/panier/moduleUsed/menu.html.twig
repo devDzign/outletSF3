@@ -1,14 +1,16 @@
 <div class="well">
     <ul class="nav nav-list">
-        <li class="nav-header">Panier</li>
+        <li class="nav-header">{{ 'produits.panier'|trans({}, 'EcommerceBundle') }}</li>
         <li>
             <a href="{{ path('panier') }}">
                 {% if nbArticles == 0 %}
-                    Aucun article dans votre panier
+                    {{ 'produits.aucun_article_panier'|trans({}, 'EcommerceBundle') }}
                 {% elseif nbArticles == 1 %}
-                    <span class="badge badge-important"> <i class=" icon-shopping-cart"></i> 1 </span>  article dans votre panier
+                    <span class="badge badge-important"> <i
+                                class=" icon-shopping-cart"></i> 1 </span> {{ 'produits.aucun_un_article_panier'|trans({}, 'EcommerceBundle') }}
                 {% else %}
-                    <span class="badge badge-important"><i class=" icon-shopping-cart"></i> {{ nbArticles }} </span>  articles dans votre panier
+                    <span class="badge badge-important"><i
+                                class=" icon-shopping-cart"></i> {{ nbArticles }} </span> {{ 'produits.aucun_more_article_panier'|trans({}, 'EcommerceBundle') }}
                 {% endif %}
             </a>
         </li>
