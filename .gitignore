@@ -48,7 +48,6 @@ phpunit.phar
 .idea/
 app/DoctrineMigrations/
 web/assets/
-
-
-
+app/config/deploy.rb
+Capfile
 

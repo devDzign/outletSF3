@@ -10,4 +10,17 @@ namespace Ecommerce\EcommerceBundle\Repository;
  */
 class CommandesRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function byFacture($utilisateur)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.utilisateur = :utilisateur')
+            ->andWhere('c.valider = 1')
+            ->andWhere('c.reference != 0')
+            ->orderBy('c.id')
+            ->setParameter('utilisateur', $utilisateur);
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -3,6 +3,7 @@
 namespace Ecommerce\EcommerceBundle\Controller;
 
 
+use Ecommerce\EcommerceBundle\Entity\Commandes;
 use Ecommerce\EcommerceBundle\Form\UtilisateursAdressesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -30,7 +31,7 @@ class CommandesController extends Controller
             $commande = $em->getRepository('EcommerceBundle:Commandes')->find($session->get('commande'));
         
         $commande->setDate(new \DateTime());
-        $commande->setUtilisateur($this->container->get('security.context')->getToken()->getUser());
+        $commande->setUtilisateur($this->getUser());
         $commande->setValider(0);
         $commande->setReference(0);
         $commande->setCommande($this->get('facture_manager_service')->facture());
@@ -50,7 +51,7 @@ class CommandesController extends Controller
      * Cette methode remplace l'api banque.
      * @Route(
      *     "/commandes/valider/{id}",
-     *      name = "commandes"
+     *      name = "validationCommande"
      *     )
      */
     public function validationCommandeAction(Request $request, $id)
@@ -62,7 +63,7 @@ class CommandesController extends Controller
             throw $this->createNotFoundException('La commande n\'existe pas');
         
         $commande->setValider(1);
-        $commande->setReference(1); //Service
+        $commande->setReference($this->get('get_reference_facture_service')->reference()); 
         $em->flush();
         
         $session = $request->getSession();

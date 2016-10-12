@@ -2,6 +2,7 @@ parameters:
     produits_manager_service_class: Ecommerce\EcommerceBundle\Services\ProduitsManager
     panier_manager_service_class: Ecommerce\EcommerceBundle\Services\PanierManager
     facture_manager_service_class: Ecommerce\EcommerceBundle\Services\FactureManager
+    get_reference_facture_service_class: Ecommerce\EcommerceBundle\Services\GetReference
     utilisateurs_session_livraison_service.class: Ecommerce\EcommerceBundle\Services\LivraisonOnSession
     utilisateurs_adresses_handler.class: Ecommerce\EcommerceBundle\Services\UtilisateursAdressesHandler
     tva_twig_extension_class: Ecommerce\EcommerceBundle\Twig\TvaExtension
@@ -21,6 +22,9 @@ services:
     facture_manager_service:
         class: "%facture_manager_service_class%"
         arguments: ["@doctrine.orm.default_entity_manager","@request_stack"]
+    get_reference_facture_service:
+         class: "%get_reference_facture_service_class%"
+         arguments: ["@doctrine.orm.default_entity_manager","@security.token_storage"]
     tva_twig_extension:
         class:  "%tva_twig_extension_class%"
         arguments: []
