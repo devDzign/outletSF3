@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Facture</title>
-    <link href="./css/facture.css" rel="stylesheet" type="text/css" />
+    <link href="./css/facture.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <h1>{{ entreprise }}</h1>
@@ -26,8 +27,9 @@
 </table>
 <ul id="coordonnes">
     <li>{{ facture.commande.facturation.nom }} {{ facture.commande.facturation.prenom }}</li>
-    <li>{{ facture.commande.facturation.adresse}}</li>
-    <li>{{ facture.commande.facturation.cp }} {{ facture.commande.facturation.ville }} - {{ facture.commande.facturation.pays }}</li>
+    <li>{{ facture.commande.facturation.adresse }}</li>
+    <li>{{ facture.commande.facturation.cp }} {{ facture.commande.facturation.ville }}
+        - {{ facture.commande.facturation.pays }}</li>
 </ul>
 <table id="entity">
     <tr>
@@ -65,7 +67,7 @@
 </table>
 <div id="footer">
     <span class="color strong">{{ adresse }}</span>
-    <br />
+    <br/>
     {{ tel }}
 </div>
 </body>

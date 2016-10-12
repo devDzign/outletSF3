@@ -24,8 +24,8 @@ class LivraisonOnSession
     private $tokenStrage;
     private $session;
     private $request;
-
-
+    
+    
     /**
      * LivraisonOnSession constructor.
      * @param RequestStack $request
@@ -45,25 +45,24 @@ class LivraisonOnSession
         $this->request     = $request->getMasterRequest();
         $this->router      = $router;
     }
-
-
-
+    
+    
     public function setLivraisonOnSession()
     {
-
-
-        if (!$this->session->has('adresse')) $this->session->set('adresse',array());
+    
+    
+        if (!$this->session->has('adresse')) $this->session->set('adresse', array());
         $adresse = $this->session->get('adresse');
-
-        if ($this->request->request->get('livraison') != null && $this->request->request->get('facturation') != null)
-        {
-            $adresse['livraison'] = $this->request->request->get('livraison');
+    
+        if ($this->request->request->get('livraison') != null && $this->request->request->get('facturation') != null) {
+            $adresse['livraison']   = $this->request->request->get('livraison');
             $adresse['facturation'] = $this->request->request->get('facturation');
         } else {
             return new RedirectResponse($this->router->generate('validation'));
         }
-
-        $this->session->set('adresse',$adresse);
+    
+        $this->session->set('adresse', $adresse);
+        
         return new RedirectResponse($this->router->generate('validation'));
     }
 }

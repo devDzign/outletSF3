@@ -3,6 +3,7 @@ parameters:
     panier_manager_service_class: Ecommerce\EcommerceBundle\Services\PanierManager
     facture_manager_service_class: Ecommerce\EcommerceBundle\Services\FactureManager
     get_reference_facture_service_class: Ecommerce\EcommerceBundle\Services\GetReference
+    generate_facture_to_pdf_service_class: Ecommerce\EcommerceBundle\Services\GenerateFacturePdf
     utilisateurs_session_livraison_service.class: Ecommerce\EcommerceBundle\Services\LivraisonOnSession
     utilisateurs_adresses_handler.class: Ecommerce\EcommerceBundle\Services\UtilisateursAdressesHandler
     tva_twig_extension_class: Ecommerce\EcommerceBundle\Twig\TvaExtension
@@ -25,6 +26,9 @@ services:
     get_reference_facture_service:
          class: "%get_reference_facture_service_class%"
          arguments: ["@doctrine.orm.default_entity_manager","@security.token_storage"]
+    generate_facture_to_pdf_service:
+         class: "%generate_facture_to_pdf_service_class%"
+         arguments: ["@doctrine.orm.default_entity_manager","@security.token_storage","@html2pdf_factory","@router","@templating"]
     tva_twig_extension:
         class:  "%tva_twig_extension_class%"
         arguments: []
