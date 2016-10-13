@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: fos_elastica.yml }
     - { resource: "@EcommerceBundle/Resources/config/services.yml" }
     - { resource: "@PagesBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }

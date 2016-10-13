@@ -1,3 +1,6 @@
+pages_pages:
+    resource: "@PagesBundle/Controller/Admin/"
+    type:     annotation
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
