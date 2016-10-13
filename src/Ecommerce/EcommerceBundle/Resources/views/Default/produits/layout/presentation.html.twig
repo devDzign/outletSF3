@@ -37,12 +37,13 @@
                                     {% endfor %}
                                 </select>
                                 <div>
-                                    <button class="btn btn-primary">Ajouter au panier</button>
+                                    <button class="btn btn-primary">{{ 'produits.ajouter_au_panier'|trans({}, 'EcommerceBundle') }}</button>
                                 </div>
                             </form>
                             {% else %}
                                 <div>
-                                    <a href="{{ path('panier') }}" class="btn btn-warning">Produit déja ajouter</a>
+                                    <a href="{{ path('panier') }}"
+                                       class="btn btn-warning">{{ 'produits.deja_ajouter'|trans({}, 'EcommerceBundle') }}</a>
                                 </div>
                         {% endif %}
 

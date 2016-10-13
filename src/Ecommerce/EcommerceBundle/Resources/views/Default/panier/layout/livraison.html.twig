@@ -11,7 +11,7 @@
                         {% if utilisateur.adresses|length != 0 %}
                             <form action="{{ path('validation') }}" method="POST">
 
-                                <h4>Adresse de livraison</h4>
+                                <h4>{{ 'produits.adresse_de_livraison'|trans({}, 'EcommerceBundle') }}</h4>
                                 {% for adresse in utilisateur.adresses %}
                                     <label class="radio">
                                         <input type="radio" name="livraison" value="{{ adresse.id }}"
@@ -25,7 +25,7 @@
 
                                 <br/><br/>
 
-                                <h4>Adresse de facturation</h4>
+                                <h4>{{ 'produits.adresse_de_facturation'|trans({}, 'EcommerceBundle') }}</h4>
                                 {% for adresse in utilisateur.adresses %}
                                     <label class="radio">
                                         <input type="radio" name="facturation" value="{{ adresse.id }}"
@@ -39,16 +39,17 @@
 
                                 <br/>
 
-                                <button class="btn btn-primary">Valider mes adresses</button>
+                                <button class="btn btn-primary">{{ 'produits.valider_mes_adresses'|trans({}, 'EcommerceBundle') }}</button>
                             </form>
                         {% endif %}
                     </div>
 
                     <div class="span4 offset2">
-                        <h4>Ajouter une nouvelle adresse</h4>
+                        <h4>{{ 'produits.ajouter_une_nouvelle_adresse'|trans({}, 'EcommerceBundle') }}</h4>
                         <form action="{{ path('livraison') }}" method="POST">
                             {{ form_widget(form) }}
-                            <button class="btn btn-primary" type="submit">Ajouter</button>
+                            <button class="btn btn-primary"
+                                    type="submit">{{ 'produits.ajouter'|trans({}, 'EcommerceBundle') }}</button>
                         </form>
                     </div>
                 </div>
