@@ -14,7 +14,7 @@ class ProduitsController extends Controller
 {
     /**
      * @Route(
-     *     "/produits",
+     *     "/",
      *      name="produits",
      *     )
      */
