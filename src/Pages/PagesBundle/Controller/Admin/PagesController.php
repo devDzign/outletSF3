@@ -29,7 +29,7 @@ class PagesController extends Controller
         $pages = $em->getRepository('PagesBundle:Pages')->findAll();
 
         return $this->render('@Pages/Admin/pages/index.html.twig', array(
-            'pages' => $pages,
+            'entities' => $pages,
         ));
     }
 
@@ -41,7 +41,7 @@ class PagesController extends Controller
      */
     public function newAction(Request $request)
     {
-        $page = new Page();
+        $page = new Pages();
         $form = $this->createForm('Pages\PagesBundle\Form\PagesType', $page);
         $form->handleRequest($request);
 
@@ -54,7 +54,7 @@ class PagesController extends Controller
         }
 
         return $this->render('@Pages/Admin/pages/new.html.twig', array(
-            'page' => $page,
+            'entity' => $page,
             'form' => $form->createView(),
         ));
     }
@@ -70,11 +70,27 @@ class PagesController extends Controller
         $deleteForm = $this->createDeleteForm($page);
 
         return $this->render('@Pages/Admin/pages/show.html.twig', array(
-            'page' => $page,
+            'entity' => $page,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
+    /**
+     * Creates a form to delete a page entity.
+     *
+     * @param Pages $page The page entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Pages $page)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_pages_delete', array('id' => $page->getId())))
+            ->setMethod('DELETE')
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
+            ->getForm();
+    }
+    
     /**
      * Displays a form to edit an existing page entity.
      *
@@ -97,7 +113,7 @@ class PagesController extends Controller
         }
 
         return $this->render('PagesBundle:Admin/pages:edit.html.twig', array(
-            'page' => $page,
+            'entity' => $page,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -127,40 +143,26 @@ class PagesController extends Controller
 
         return $this->redirectToRoute('admin_pages_index');
     }
-
-    /**
-     * Creates a form to delete a page entity.
-     *
-     * @param Pages $page The page entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Pages $page)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_pages_delete', array('id' => $page->getId())))
-            ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm();
-    }
     
     public function updateAction(Request $request, Pages $page)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em     = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('PagesBundle:Pages')->find($page->getId());
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pages entity.');
         }
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($page->getId());
+        $editForm   = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $em->flush();
+
             return $this->redirect($this->generateUrl('adminPages_edit', array('id' => $id)));
         }
+    
         return $this->render('PagesBundle:Administration:pages/layout/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

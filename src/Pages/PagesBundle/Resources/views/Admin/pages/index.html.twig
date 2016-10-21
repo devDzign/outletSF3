@@ -11,12 +11,18 @@
         </tr>
         </thead>
         <tbody>
-        {% for entity in pages %}
+        {% for entity in entities %}
             <tr>
                 <td>{{ entity.titre }}</td>
                 <td>
-                    <a href="{{ path('admin_pages_show', { 'id': entity.id }) }}"><i class="icon-book"></i></a>
-                    <a href="{{ path('admin_pages_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+                    <a href="{{ path('admin_pages_show', { 'id': entity.id }) }}" class="btn btn-success"><i
+                                class="icon-book"></i></a>
+                    |
+                    <a href="{{ path('admin_pages_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
+                                class="icon-edit"></i></a>
+                    |
+                    <a href="{{ path('admin_pages_delete', { 'id': entity.id }) }}" class="btn btn-danger"><i
+                                class="icon-remove"></i></a>
                     </ul>
                 </td>
             </tr>
@@ -25,10 +31,10 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('admin_pages_new') }}">
-                nouvelle page
+
+        <a href="{{ path('admin_pages_new') }}" class="btn btn-block btn-primary">
+            <i class="icon-plus"></i> Nouvelle page
             </a>
-        </li>
+
     </ul>
 {% endblock %}

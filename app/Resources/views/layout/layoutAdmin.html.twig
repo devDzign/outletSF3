@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-responsive.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('bootstrap/css/font-awesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('js/ckeditor/contents.css') }}"/>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -44,8 +45,9 @@
             </div>
         </div>
 </footer>
-<script src="{{ asset('js/jquery-1.10.0.min.js') }}"></script>
-<script src="{{ asset('../js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

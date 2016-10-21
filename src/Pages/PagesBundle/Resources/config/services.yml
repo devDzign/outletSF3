@@ -1,4 +1,15 @@
+parameters:
+    extension.form.ckeditor.class: Pages\PagesBundle\Form\CkeditorType
+
 services:
 #    pages.example:
 #        class: Pages\PagesBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+
+    # src/OC/PlatformBundle/Resources/config/services.yml
+
+
+    extension.form.ckeditor:
+        class: "%extension.form.ckeditor.class%"
+        tags:
+             - { name: form.type, alias: ckeditor }
