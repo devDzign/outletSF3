@@ -97,7 +97,7 @@ class PanierController extends Controller
     public function livraisonAction()
     {
         $handler = $this->get("utilisateurs_adresses_handler");
-        $form    = $handler->getForm();
+
         
         if ($handler->process()) {
             return $this->redirectToRoute('livraison');
@@ -105,7 +105,7 @@ class PanierController extends Controller
         
         return $this->render('EcommerceBundle:Default:panier/layout/livraison.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $handler->createForm(),
                 'utilisateur' => $this->getUser()
             ]
         );

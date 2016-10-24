@@ -48,15 +48,16 @@ services:
         class: "%symfony.form.class%"
         factory: ["@form.factory",createNamed]
         arguments:
-            - test
-            - former
-    utilisateurs_adresses_type:
-        class: "%utilisateurs_adresses_type.class%"
-        tags:
-            - { name: form.type, alias: former }
+            - adresseU
+            - '%utilisateurs_adresses_type.class%'
+#            - userad_form
+#    utilisateurs_adresses_type:
+#        class: "%utilisateurs_adresses_type.class%"
+#        tags:
+#            - { name: form.type, alias: userad_former }
     utilisateurs_adresses_handler:
         class: "%utilisateurs_adresses_handler.class%"
-        arguments: ["@form.factory","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage"]
+        arguments: ["@form.factory","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@userad_form"]
     utilisateurs_session_livraison_service:
         class: "%utilisateurs_session_livraison_service.class%"
         arguments: ["@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@router"]

@@ -37,4 +37,12 @@ class UtilisateursAdressesType extends AbstractType
             'data_class' => 'Ecommerce\EcommerceBundle\Entity\UtilisateursAdresses'
         ));
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'userad_former';
+    }
 }

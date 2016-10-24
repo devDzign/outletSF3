@@ -22,7 +22,5 @@ class CategoriesController extends Controller
 
         return $this->render('@Ecommerce/Default/categories/modulesUsed/menu.html.twig', ['categories' => $categories]);
     }
-
-
     
 }

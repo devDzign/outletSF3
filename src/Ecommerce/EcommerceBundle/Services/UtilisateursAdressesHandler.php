@@ -21,6 +21,7 @@ class UtilisateursAdressesHandler
 
 
     protected $form;
+    protected $former;
     protected $request;
     protected $em;
     protected $security;
@@ -37,14 +38,17 @@ class UtilisateursAdressesHandler
         FormFactory $form,
         RequestStack $request,
         EntityManager $em,
-        TokenStorage $security
+        TokenStorage $security,
+        Form $former
+
     )
     {
-        $this->request  = $request->getMasterRequest();
-        $this->em       = $em;
-        $this->security = $security;
+        $this->request              = $request->getMasterRequest();
+        $this->em                   = $em;
+        $this->security             = $security;
         $this->utilisateursAdresses =  new UtilisateursAdresses();
-        $this->form     = $form->createBuilder(UtilisateursAdressesType::class,$this->utilisateursAdresses)->getForm();
+        $this->form                 = $form->createBuilder(UtilisateursAdressesType::class,$this->utilisateursAdresses)->getForm();
+        $this->former               = $former;
 
     }
 
@@ -53,9 +57,9 @@ class UtilisateursAdressesHandler
      */
     public function process()
     {
-        $this->form->handleRequest($this->request);
-
-        if ($this->request->isMethod('post') && $this->form->isValid()) {
+        $this->former->handleRequest($this->request);
+    
+        if ($this->request->isMethod('post') && $this->former->isValid()) {
             $this->onSuccess();
 
             return true;
@@ -65,13 +69,32 @@ class UtilisateursAdressesHandler
     }
 
     /**
+     *
+     */
+    protected function onSuccess()
+    {
+        $this->utilisateursAdresses = $this->former->getData();
+        $this->utilisateursAdresses->setUtilisateur($this->security->getToken()->getUser());
+        $this->em->persist($this->utilisateursAdresses);
+        $this->em->flush();
+    }
+    
+    /**
      * @return Form
      */
     public function getForm()
     {
-        return $this->form;
+        return $this->former;
     }
 
+    /**
+     * @return Former
+     */
+    public function getFormer()
+    {
+        return $this->former;
+    }
+    
     /**
      * @return UtilisateursAdresses
      *
@@ -86,17 +109,6 @@ class UtilisateursAdressesHandler
      */
     public function createForm()
     {
-        return $this->form->createView();
-    }
-
-    /**
-     *
-     */
-    protected function onSuccess()
-    {
-        $this->utilisateursAdresses = $this->form->getData();
-        $this->utilisateursAdresses->setUtilisateur($this->security->getToken()->getUser());
-        $this->em->persist($this->utilisateursAdresses);
-        $this->em->flush();
+        return $this->former->createView();
     }
 }
