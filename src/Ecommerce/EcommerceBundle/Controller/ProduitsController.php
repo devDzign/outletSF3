@@ -51,11 +51,9 @@ class ProduitsController extends Controller
      *     name = "categorieProduits",
      * )
      */
-    public function categorieProduitsAction($idCategorie)
+    public function categorieProduitsAction(Request $request, $idCategorie)
     {
-        $produits = $this->get('produits_manager_service')->getProductByCategory($idCategorie);
-
-        return $this->render('@Ecommerce/Default/produits/layout/produits.html.twig', ['produits' => $produits]);
+        return $this->redirectToRoute('produits', array('idCategorie' => $idCategorie));
     }
 
 

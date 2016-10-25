@@ -11,7 +11,7 @@ class ProduitsControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/produits');
     
-        $this->assertContains('Ajouter', $client->getResponse()->getContent());
+        $this->assertContains('Ajouter', $client->getResponse()->getContent(), 'message erreur');
     }
 
     public function testProduits2()
@@ -19,10 +19,11 @@ class ProduitsControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/produits');
-
-        $this->assertEquals(
+    
+        $this->assertGreaterThan(
             0,
-            $crawler->filter('html:contains("All")')->count()
+            $crawler->filter('html:contains("All")')->count(),
+            'mesage erreuur 2'
         );
     }
 }

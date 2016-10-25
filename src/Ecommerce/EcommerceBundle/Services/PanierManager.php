@@ -61,18 +61,6 @@ class PanierManager
         return $this->session;
     }
     
-    public function getPanier()
-    {
-        if($this->session->has('panier')){
-            $this->panier = $this->session->get('panier');
-            return $this->session->get('panier');
-        }else{
-
-            return false;
-        }
-
-    }
-    
     /**
      * @param $idProduit
      * @return mixed
@@ -106,6 +94,19 @@ class PanierManager
         $this->session->set('panier', $this->panier);
     }
     
+    public function getPanier()
+    {
+        if ($this->session->has('panier')) {
+            $this->panier = $this->session->get('panier');
+            
+            return $this->session->get('panier');
+        } else {
+            
+            return false;
+        }
+
+    }
+    
     /**
      * @param $idProduct
      */
@@ -130,6 +131,7 @@ class PanierManager
 
     public function countProductPanier()
     {
+        dump($this->getPanier());
         return count($this->getPanier());
     }
     
