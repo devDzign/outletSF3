@@ -15,15 +15,18 @@
             <tr>
                 <td>{{ entity.titre }}</td>
                 <td>
-                    <a href="{{ path('admin_pages_show', { 'id': entity.id }) }}" class="btn btn-success"><i
-                                class="icon-book"></i></a>
+                    <a href="{{ path('admin_pages_show', { 'id': entity.id }) }}" class="btn btn-success">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </a>
                     |
-                    <a href="{{ path('admin_pages_edit', { 'id': entity.id }) }}" class="btn btn-primary"><i
-                                class="icon-edit"></i></a>
+                    <a href="{{ path('admin_pages_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
                     |
-                    <a href="{{ path('admin_pages_delete', { 'id': entity.id }) }}" class="btn btn-danger"><i
-                                class="icon-remove"></i></a>
-                    </ul>
+                    <a href="{{ path('admin_pages_delete', { 'id': entity.id }) }}" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+
                 </td>
             </tr>
         {% endfor %}

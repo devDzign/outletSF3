@@ -1,15 +1,58 @@
 {% extends '::layout/layoutAdmin.html.twig' %}
 
 {% block body %}
-    <h2>Pages edit</h2>
-    <div class="span4">
-        {{ form(edit_form) }}
-    </div>
-    <div class="span8">
-        <div class="row">
-            <div class="span6">
-                <a href="{{ path('admin_pages_index') }}" class="btn btn-primary">Retour</a>| {{ form(delete_form) }}
+
+    <h3>Editer une Page</h3>
+
+    <div class="well">
+        {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_errors(edit_form) }}
+
+        <div class="control-group">
+            {{ form_label(edit_form.titre, "Titre de la page", {'label_attr': {'class': 'control-label '}}) }}
+            {{ form_errors(edit_form.titre) }}
+            <div class="controls">
+                {{ form_widget(edit_form.titre, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
+
+        <div class="control-group">
+            {{ form_label(edit_form.contenu, "Contenu de l'annonce", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_errors(edit_form.contenu) }}
+            <div class="controls">
+                {{ form_widget(edit_form.contenu, {'attr': {'class': 'form-control ckeditor'}}) }}
+            </div>
+        </div>
+
+        <div class="control-group"><br>
+            <div class="controls">
+                {{ form_widget(edit_form.valider, {'attr': {'class': 'btn btn-block btn-success'}}) }}
+
+            </div>
+        </div>
+
+        {{ form_rest(edit_form) }}
+        {{ form_end(edit_form) }}
+        <br>
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+                {{ form_errors(edit_form) }}
+                {{ form_widget( delete_form.submit ,{'attr': {'class': 'btn  btn-danger'}}) }}
+            </div>
+
+            <div class="btn-group" role="group">
+                <a href="{{ path('admin_pages_index') }}" class="btn  btn-primary"> <span
+                            class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Retour</a>
+            </div>
+        </div>
+
+        {{ form_rest(delete_form) }}
+        {{ form_end(delete_form) }}
+
+
+
+
     </div>
 {% endblock %}

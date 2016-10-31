@@ -1,32 +1,18 @@
-<div class="span3">
+<div class="col-sm-3">
 
-    <div class="well">
-        <ul class="nav nav-list">
-            <li>
-                <a href="ajout-edit.php">Produits</a>
-            </li>
-            <li>
-                <a href="ajout-edit.php">Catégories produits</a>
-            </li>
-        </ul>
+    <div class="list-group">
+        <a href="{{ path('admin_produits_index') }}" class="list-group-item">Produits</a>
+        <a href="ajout-edit.php" class="list-group-item">Catégories produits</a>
     </div>
 
-    <div class="well">
-        <ul class="nav nav-list">
-            <li>
-                <a href="ajout-edit.php">Clients</a>
-            </li>
-            <li>
-                <a href="ajout-edit.php">Commandes</a>
-            </li>
-        </ul>
+    <div class="list-group">
+        <a href="ajout-edit.php" class="list-group-item">Clients</a>
+        <a href="ajout-edit.php" class="list-group-item">Commandes</a>
     </div>
 
-    <div class="well">
-        <ul class="nav nav-list">
-            <li>
-                <a href="{{ path('admin_pages_index') }}">Pages</a>
-            </li>
-        </ul>
+    <div class="list-group">
+        <a href="{{ path('admin_pages_index') }}" class="list-group-item">Pages</a>
+
     </div>
+
 </div>
