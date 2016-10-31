@@ -10,10 +10,15 @@ namespace Ecommerce\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Ecommerce\EcommerceBundle\Entity\UtilisateursAdresses;
+use Ecommerce\EcommerceBundle\Event\AdressePaysEvent;
+use Ecommerce\EcommerceBundle\Event\EcommerceEvents;
+use Ecommerce\EcommerceBundle\Event\PaysUpperCaseEvent;
+use Ecommerce\EcommerceBundle\EventListener\PaysUpperCaseSubscriber;
 use Ecommerce\EcommerceBundle\Form\UtilisateursAdressesType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class UtilisateursAdressesHandler
@@ -26,6 +31,7 @@ class UtilisateursAdressesHandler
     protected $em;
     protected $security;
     protected $utilisateursAdresses;
+    protected $eventDispatcher;
 
     /**
      * UtilisateursAdressesHandler constructor.
@@ -39,16 +45,18 @@ class UtilisateursAdressesHandler
         RequestStack $request,
         EntityManager $em,
         TokenStorage $security,
-        Form $former
-
+        Form $former,
+        TraceableEventDispatcher $evenvtDispatcher
+    
     )
     {
         $this->request              = $request->getMasterRequest();
         $this->em                   = $em;
         $this->security             = $security;
         $this->utilisateursAdresses =  new UtilisateursAdresses();
-        $this->form                 = $form->createBuilder(UtilisateursAdressesType::class,$this->utilisateursAdresses)->getForm();
-        $this->former               = $former;
+        //$this->form                 = $form->createBuilder(UtilisateursAdressesType::class,$this->utilisateursAdresses)->getForm();
+        $this->former           = $former;
+        $this->evenvtDispatcher = $evenvtDispatcher;
 
     }
 
@@ -57,9 +65,13 @@ class UtilisateursAdressesHandler
      */
     public function process()
     {
-        $this->former->handleRequest($this->request);
-    
+        $event = new AdressePaysEvent($this->request->request->get("pays"));
+        $this->evenvtDispatcher->dispatch(EcommerceEvents::ADREESSE_PAYS, $event);
+       
+        
         if ($this->request->isMethod('post') && $this->former->isValid()) {
+            $this->request->request->set("pays", $event->getPays());
+            $this->former->handleRequest($this->request);
             $this->onSuccess();
 
             return true;

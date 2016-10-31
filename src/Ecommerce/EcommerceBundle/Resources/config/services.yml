@@ -57,7 +57,19 @@ services:
 #            - { name: form.type, alias: userad_former }
     utilisateurs_adresses_handler:
         class: "%utilisateurs_adresses_handler.class%"
-        arguments: ["@form.factory","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@userad_form"]
+        arguments: ["@form.factory","@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@userad_form","@event_dispatcher"]
     utilisateurs_session_livraison_service:
         class: "%utilisateurs_session_livraison_service.class%"
         arguments: ["@request_stack", "@doctrine.orm.default_entity_manager", "@security.token_storage","@router"]
+    ecommerce_listner_new_event:
+        class: Ecommerce\EcommerceBundle\EventListener\UcAdressePaysListener
+        arguments: ["@request_stack"]
+        tags:
+            - { name: kernel.event_listener, event: ecommerce_events.adresse_pays , method: processMessage }
+    oc_platform.bigbrother.message_listener:
+        class:  Ecommerce\EcommerceBundle\EventListener\PaysUpperCaseSubscriber
+#        arguments:
+#          - "@oc_platform.bigbrother.message_notificator"
+#          - ["alexandre", "marine", "pierre"]
+        tags:
+          - { name: kernel.event_subscriber }
