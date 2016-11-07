@@ -1,8 +1,10 @@
 <div class="col-sm-3" id="sidebar-wrapper">
 
     <div class="list-group">
+        <a href="{{ path('admin_tva_index') }}" class="list-group-item">Tva</a>
+        <a href="{{ path('admin_categories_index') }}" class="list-group-item">Catégories</a>
         <a href="{{ path('admin_produits_index') }}" class="list-group-item">Produits</a>
-        <a href="ajout-edit.php" class="list-group-item">Catégories produits</a>
+
     </div>
 
     <div class="list-group">
@@ -12,7 +14,6 @@
 
     <div class="list-group">
         <a href="{{ path('admin_pages_index') }}" class="list-group-item">Pages</a>
-
     </div>
     {#pour voir le code de developement #}
     {{ show_source_code(_self) }}

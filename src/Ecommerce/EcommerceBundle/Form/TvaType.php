@@ -13,7 +13,10 @@ class TvaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('multiplicate')->add('nom')->add('valeur');
+        $builder
+            ->add('nom')
+            ->add('multiplicate')
+            ->add('valeur');
     }
     
     /**
