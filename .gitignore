@@ -51,3 +51,13 @@ web/assets/
 app/config/deploy.rb
 Capfile
 
+app/Resources/translations/
+src/Ecommerce/EcommerceBundle/Entity/web/
+src/Ecommerce/EcommerceBundle/Resources/views/Admin/layout/
+src/Ecommerce/EcommerceBundle/Resources/views/Default/categories/layout/
+tests/PagesBundle/
+tests/UserBundle/
+var/cache/
+var/logs/
+var/sessions/
+web/bootstrap/bootstrap-3.3.7-dist/
