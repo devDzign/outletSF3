@@ -7,6 +7,12 @@ produits_admin:
 categories_admin:
     resource: "@EcommerceBundle/Controller/Admin/CategoriesController.php"
     type:     annotation
+tva_admin:
+    resource: "@EcommerceBundle/Controller/Admin/TvaController.php"
+    type:     annotation
+commande_admin:
+    resource: "@EcommerceBundle/Controller/Admin/CommandesController.php"
+    type:     annotation
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation

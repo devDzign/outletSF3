@@ -65,13 +65,8 @@ class UtilisateursAdressesHandler
      */
     public function process()
     {
-        $event = new AdressePaysEvent($this->request->request->get("pays"));
-        $this->evenvtDispatcher->dispatch(EcommerceEvents::ADREESSE_PAYS, $event);
-       
-        
+        $this->former->handleRequest($this->request);
         if ($this->request->isMethod('post') && $this->former->isValid()) {
-            $this->request->request->set("pays", $event->getPays());
-            $this->former->handleRequest($this->request);
             $this->onSuccess();
 
             return true;

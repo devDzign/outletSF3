@@ -52,7 +52,7 @@ class GenerateFacturePdf
         $this->templating   = $templating;
     }
     
-    public function generateFactureHtmlToPdf($id)
+    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures')
     {
         $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
             array(
@@ -65,8 +65,8 @@ class GenerateFacturePdf
         if (!$facture) {
             
             $this->session->getFlashBag()->add('error', 'Une erreur est survenue');
-            
-            return new RedirectResponse($this->router->generate('factures'));
+    
+            return new RedirectResponse($this->router->generate($redirectTemplate));
         }
         
         $html = $this->templating->render('UserBundle:Default:layout/facturePDF.html.twig', array('facture' => $facture));
