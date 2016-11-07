@@ -1,5 +1,5 @@
 <form action="{{ path('recherche') }}" method="POST" class="navbar-form form-search pull-right">
     {{ form_widget(form.motCle) }}
-    <button type="submit" class="btn">{{ 'produits.aucun_un_article_panier'|trans({}, 'EcommerceBundle') }}</button>
+    <button type="submit" class="btn">{{ 'produits.recherche_search'|trans({}, 'EcommerceBundle') }}</button>
     {{ form_widget(form) }}
 </form>

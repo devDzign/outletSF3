@@ -1,0 +1,36 @@
+{% extends '::layout/layoutAdmin.html.twig' %}
+
+{% block body -%}
+    <h1>Creation d'une Categorie</h1>
+
+    <form action="{{ path('admin_categories_new') }}" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            {{ form_label(form.nom) }}
+            {{ form_errors(form.nom) }}
+            {{ form_widget(form.nom,{'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="well">
+            <div class="form-group">
+                {{ form_label(form.image.file) }}
+                {{ form_errors(form.image.file) }}
+                {{ form_widget(form.image.file,{'attr': {'class': 'form-control'}}) }}
+
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image.alt) }}
+                {{ form_errors(form.image.alt) }}
+                {{ form_widget(form.image.alt,{'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="{{ path('admin_categories_index') }}" class="btn btn-info">
+            Back to the list
+        </a>
+        {{ form_rest(form) }}
+    </form>
+
+{% endblock %}
+

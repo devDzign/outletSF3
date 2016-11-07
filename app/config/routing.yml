@@ -1,11 +1,11 @@
-pages_pages:
-    resource: "@PagesBundle/Controller/Admin/"
+pages_admin:
+    resource: "@PagesBundle/Controller/Admin/PagesController.php"
     type:     annotation
 produits_admin:
-    resource: "@EcommerceBundle/Controller/Admin/"
+    resource: "@EcommerceBundle/Controller/Admin/ProduitsController.php"
     type:     annotation
-ecommerce_produits:
-    resource: "@EcommerceBundle/Controller/ProduitsController.php"
+categories_admin:
+    resource: "@EcommerceBundle/Controller/Admin/CategoriesController.php"
     type:     annotation
 user:
     resource: "@UserBundle/Controller/"

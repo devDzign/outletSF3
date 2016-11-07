@@ -1,0 +1,41 @@
+{% extends '::layout/layoutAdmin.html.twig' %}
+
+{% block body -%}
+    <h1>Pages list</h1>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in categories %}
+            <tr>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.image.assetPath }}</td>
+
+                <td>
+                    <a href="{{ path('admin_categories_show', { 'id': entity.id }) }}" class="btn btn-success">
+                        <span class="glyphicon glyphicon-book"></span>
+                    </a>
+                    |
+                    <a href="{{ path('admin_categories_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+
+        <a href="{{ path('admin_categories_new') }}" class="btn btn-block btn-primary">
+            <i class="icon-plus"></i> Nouvelle page
+        </a>
+
+    </ul>
+{% endblock %}

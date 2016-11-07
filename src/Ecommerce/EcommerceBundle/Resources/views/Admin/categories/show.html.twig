@@ -1,0 +1,39 @@
+{% extends '::layout/layoutAdmin.html.twig' %}
+
+{% block body %}
+
+    <div class="panel panel-success">
+
+        <div class="panel-heading">Fiche Categorie</div>
+        <div class="panel-body">
+            <p>Categorie Id : {{ entity.id }}</p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">{{ entity.nom }}</li>
+        </ul>
+        <div class="panel-footer">
+
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_categories_index') }}" class="btn btn-success">
+                        Back to the list
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_categories_edit', { 'id': entity.id }) }}" class="btn btn-info">
+                        Edit
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    {{ form_start(delete_form, {'attr': {'class': 'form-horizontal'}}) }}
+                    {{ form_errors(delete_form) }}
+                    {{ form_widget( delete_form.submit ,{'attr': {'class': 'btn  btn-danger'}}) }}
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
