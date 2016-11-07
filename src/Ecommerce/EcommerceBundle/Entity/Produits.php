@@ -26,13 +26,13 @@ class Produits
      */
     private $image;
     /**
-     * @ORM\ManyToOne(targetEntity="Ecommerce\EcommerceBundle\Entity\Categories", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="Ecommerce\EcommerceBundle\Entity\Categories", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ecommerce\EcommerceBundle\Entity\Tva", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="Ecommerce\EcommerceBundle\Entity\Tva", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $tva;
@@ -70,6 +70,17 @@ class Produits
     {
         return $this->id;
     }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    
     /**
      * Set nom
      *
@@ -81,15 +92,17 @@ class Produits
         $this->nom = $nom;
         return $this;
     }
+
     /**
-     * Get nom
+     * Get description
      *
      * @return string
      */
-    public function getNom()
+    public function getDescription()
     {
-        return $this->nom;
+        return $this->description;
     }
+
     /**
      * Set description
      *
@@ -101,15 +114,17 @@ class Produits
         $this->description = $description;
         return $this;
     }
+
     /**
-     * Get description
+     * Get prix
      *
-     * @return string
+     * @return float
      */
-    public function getDescription()
+    public function getPrix()
     {
-        return $this->description;
+        return $this->prix;
     }
+
     /**
      * Set prix
      *
@@ -121,15 +136,17 @@ class Produits
         $this->prix = $prix;
         return $this;
     }
+
     /**
-     * Get prix
+     * Get disponible
      *
-     * @return float
+     * @return boolean
      */
-    public function getPrix()
+    public function getDisponible()
     {
-        return $this->prix;
+        return $this->disponible;
     }
+
     /**
      * Set disponible
      *
@@ -141,15 +158,17 @@ class Produits
         $this->disponible = $disponible;
         return $this;
     }
+
     /**
-     * Get disponible
+     * Get image
      *
-     * @return boolean
+     * @return \Ecommerce\EcommerceBundle\Entity\Media
      */
-    public function getDisponible()
+    public function getImage()
     {
-        return $this->disponible;
+        return $this->image;
     }
+    
     /**
      * Set image
      *
@@ -161,15 +180,17 @@ class Produits
         $this->image = $image;
         return $this;
     }
+    
     /**
-     * Get image
+     * Get categorie
      *
-     * @return \Ecommerce\EcommerceBundle\Entity\Media
+     * @return \Ecommerce\EcommerceBundle\Entity\Categories
      */
-    public function getImage()
+    public function getCategorie()
     {
-        return $this->image;
+        return $this->categorie;
     }
+    
     /**
      * Set categorie
      *
@@ -181,15 +202,17 @@ class Produits
         $this->categorie = $categorie;
         return $this;
     }
+    
     /**
-     * Get categorie
+     * Get tva
      *
-     * @return \Ecommerce\EcommerceBundle\Entity\Categories
+     * @return \Ecommerce\EcommerceBundle\Entity\Tva
      */
-    public function getCategorie()
+    public function getTva()
     {
-        return $this->categorie;
+        return $this->tva;
     }
+    
     /**
      * Set tva
      *
@@ -200,14 +223,5 @@ class Produits
     {
         $this->tva = $tva;
         return $this;
-    }
-    /**
-     * Get tva
-     *
-     * @return \Ecommerce\EcommerceBundle\Entity\Tva
-     */
-    public function getTva()
-    {
-        return $this->tva;
     }
 }
