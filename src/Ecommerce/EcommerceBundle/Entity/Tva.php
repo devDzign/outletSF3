@@ -47,6 +47,17 @@ class Tva
     {
         return $this->id;
     }
+
+    /**
+     * Get multiplicate
+     *
+     * @return float
+     */
+    public function getMultiplicate()
+    {
+        return $this->multiplicate;
+    }
+    
     /**
      * Set multiplicate
      *
@@ -58,15 +69,17 @@ class Tva
         $this->multiplicate = $multiplicate;
         return $this;
     }
+
     /**
-     * Get multiplicate
+     * Get nom
      *
-     * @return float
+     * @return string
      */
-    public function getMultiplicate()
+    public function getNom()
     {
-        return $this->multiplicate;
+        return $this->nom;
     }
+
     /**
      * Set nom
      *
@@ -78,15 +91,17 @@ class Tva
         $this->nom = $nom;
         return $this;
     }
+
     /**
-     * Get nom
+     * Get valeur
      *
-     * @return string
+     * @return float
      */
-    public function getNom()
+    public function getValeur()
     {
-        return $this->nom;
+        return $this->valeur;
     }
+    
     /**
      * Set valeur
      *
@@ -98,14 +113,10 @@ class Tva
         $this->valeur = $valeur;
         return $this;
     }
-    /**
-     * Get valeur
-     *
-     * @return float
-     */
-    public function getValeur()
+    
+    public function __toString()
     {
-        return $this->valeur;
+        return $this->nom;
     }
 }
 

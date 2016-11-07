@@ -16,7 +16,8 @@
                         {% for produit in produits %}
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <img src="{{ produit.image.path }}" alt="mcMourad" width="300" height="300">
+                                    <img src="{{ asset(produit.image.getAssetPath()) }}" alt="{{ produit.image.alt }}"
+                                         width="300" height="300">
                                     <div class="caption">
                                         <h4>{{ produit.nom }}</h4>
                                         <p>{{ produit.prix | tva(produit.tva.valeur) }} €</p>

@@ -26,8 +26,9 @@
 
         <div class="control-group"><br>
             <div class="controls">
-                {{ form_widget(edit_form.valider, {'attr': {'class': 'btn btn-block btn-success'}}) }}
-
+                <button type="submit" class="btn btn-success btn-block">
+                    <span class="glyphicon glyphicon-ok"></span> Envoyer
+                </button>
             </div>
         </div>
 
@@ -37,9 +38,10 @@
 
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
-                {{ form_errors(edit_form) }}
+                {{ form_start(delete_form, {'attr': {'class': 'form-horizontal'}}) }}
+                {{ form_errors(delete_form) }}
                 {{ form_widget( delete_form.submit ,{'attr': {'class': 'btn  btn-danger'}}) }}
+
             </div>
 
             <div class="btn-group" role="group">
@@ -50,9 +52,6 @@
 
         {{ form_rest(delete_form) }}
         {{ form_end(delete_form) }}
-
-
-
 
     </div>
 {% endblock %}

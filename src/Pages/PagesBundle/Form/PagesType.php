@@ -16,8 +16,7 @@ class PagesType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('contenu', CkeditorType::class)
-            ->add('valider', SubmitType::class);
+            ->add('contenu', CkeditorType::class);
     }
     
     /**

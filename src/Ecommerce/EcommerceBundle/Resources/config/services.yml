@@ -73,3 +73,7 @@ services:
 #          - ["alexandre", "marine", "pierre"]
         tags:
           - { name: kernel.event_subscriber }
+
+    entuty_media_service:
+        class: Ecommerce\EcommerceBundle\Entity\Media
+        arguments: ["%img_directory%"]

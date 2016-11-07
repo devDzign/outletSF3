@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>{% block titre %}Shop2Shop{% endblock %}</title>
-    <meta name="keywords" content="{% block motsCles %}{% endblock %}" />
-    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="keywords" content="{% block motsCles %}{% endblock %}"/>
+    <meta name="description" content="{% block description %}{% endblock %}"/>
 
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-3.3.7-dist/css/bootstrap-theme.css') }}"/>
@@ -13,7 +13,7 @@
 
 
     {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
 
@@ -65,12 +65,18 @@
     <div class="row">
         {% include '::modulesUsed/navigationAdmin.html.twig' %}
         <div class="col-sm-9">
-            {% block body %}{% endblock %}
+
+            {{ include('default/_flash_messages.html.twig') }}
+
+
+            {% block body %}
+
+            {% endblock %}
         </div>
     </div>
 </div>
 
-<hr />
+<hr/>
 <footer id="footer" class="vspace20">
     <div class="container">
         <div class="row">

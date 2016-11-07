@@ -22,10 +22,13 @@
                     <a href="{{ path('admin_pages_edit', { 'id': entity.id }) }}" class="btn btn-primary">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
-                    |
-                    <a href="{{ path('admin_pages_delete', { 'id': entity.id }) }}" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </a>
+                    {#|#}
+                    {#<form action="{{ path('admin_pages_delete', { 'id': entity.id }) }}" method="POST" enctype="multipart/form-data">#}
+                    {#<button type="submit" class="btn btn-danger">#}
+                    {#<span class="glyphicon glyphicon-remove"></span>#}
+                    {#</button>#}
+                    {#</form>#}
+
 
                 </td>
             </tr>

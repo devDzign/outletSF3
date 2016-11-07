@@ -41,6 +41,17 @@ class Categories
     {
         return $this->id;
     }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    
     /**
      * Set nom
      *
@@ -52,15 +63,17 @@ class Categories
         $this->nom = $nom;
         return $this;
     }
+
     /**
-     * Get nom
+     * Get image
      *
-     * @return string
+     * @return \Ecommerce\EcommerceBundle\Entity\Media
      */
-    public function getNom()
+    public function getImage()
     {
-        return $this->nom;
+        return $this->image;
     }
+    
     /**
      * Set image
      *
@@ -72,14 +85,14 @@ class Categories
         $this->image = $image;
         return $this;
     }
+    
     /**
-     * Get image
-     *
-     * @return \Ecommerce\EcommerceBundle\Entity\Media
+     * @return mixed
      */
-    public function getImage()
+    public function __toString()
     {
-        return $this->image;
+        return $this->nom;
     }
+    
 }
 

@@ -1,21 +1,70 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/layoutAdmin.html.twig' %}
 
 {% block body %}
     <h1>Produit edit</h1>
 
-    {{ form_start(edit_form) }}
-    {{ form_widget(edit_form) }}
-    <input type="submit" value="Edit"/>
-    {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <form action="{{ path('admin_produits_edit', {'id': produit.id}) }}" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            {{ form_label(form_edit.nom) }}
+            {{ form_errors(form_edit.nom) }}
+            {{ form_widget(form_edit.nom,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form_edit.description) }}
+            {{ form_errors(form_edit.description) }}
+            {{ form_widget(form_edit.description,{'attr': {'class': 'form-control ckeditor'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form_edit.prix) }}
+            {{ form_errors(form_edit.prix) }}
+            {{ form_widget(form_edit.prix,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form_edit.tva) }}
+            {{ form_errors(form_edit.tva) }}
+            {{ form_widget(form_edit.tva,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form_edit.categorie) }}
+            {{ form_errors(form_edit.categorie) }}
+            {{ form_widget(form_edit.categorie,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="checkbox">
+            <label>
+                {{ form_label(form_edit.disponible) }}
+                {{ form_errors(form_edit.disponible) }}
+                {{ form_widget(form_edit.disponible) }}
+            </label>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                {{ form_label(form_edit.image.file) }}
+                {{ form_errors(form_edit.image.file) }}
+                {{ form_widget(form_edit.image.file,{'attr': {'class': 'form-control'}}) }}
+
+            </div>
+            <div class="form-group">
+                {{ form_label(form_edit.image.alt) }}
+                {{ form_errors(form_edit.image.alt) }}
+                {{ form_widget(form_edit.image.alt,{'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="span5">
+                <img src="{{ asset(produit.image.getAssetPath()) }}" alt="{{ produit.image.alt }}" width="470"
+                     height="310">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="{{ path('admin_produits_index') }}" class="btn btn-info">
+            Back to the list
+        </a>
+        {{ form_rest(form_edit) }}
+    </form>
+
 {% endblock %}

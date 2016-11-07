@@ -1,46 +1,45 @@
 {% extends '::layout/layoutAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Produits</h1>
 
-    <table class="record_properties">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ entity.nom }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ entity.description }}</td>
-        </tr>
-        <tr>
-            <th>Prix</th>
-            <td>{{ entity.prix }}</td>
-        </tr>
-        <tr>
-            <th>Disponible</th>
-            <td>{{ entity.disponible }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="panel panel-success">
 
-    <ul class="record_actions">
-
-        <a href="{{ path('admin_produits_index') }}" class="btn btn-primary">
-            Back to the list
-        </a>
-        |
-        <a href="{{ path('admin_produits_edit', { 'id': entity.id }) }}" class="btn btn-success">
-            Edit
-        </a>
-
-        <div>
-            {#avoir le formulaire de suppression#}
-            {{ form(delete_form) }}
+        <div class="panel-heading">Fiche Produit</div>
+        <div class="panel-body">
+            <p>Page Id : {{ entity.id }}</p>
         </div>
-    </ul>
+        <ul class="list-group">
+            <li class="list-group-item">{{ entity.nom }}</li>
+            <li class="list-group-item"
+                style="padding-left: 15px;padding-right: 20px">{{ entity.description| raw }}</li>
+            <li class="list-group-item">{{ entity.prix }}</li>
+            <li class="list-group-item">{{ entity.disponible }}</li>
+            <li class="list-group-item">{{ entity.tva.nom }}</li>
+            <li class="list-group-item">{{ entity.categorie.nom }}</li>
+        </ul>
+        <div class="panel-footer">
+
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_produits_index') }}" class="btn btn-success">
+                        Back to the list
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_produits_edit', { 'id': entity.id }) }}" class="btn btn-info">
+                        Edit
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    {{ form_start(delete_form, {'attr': {'class': 'form-horizontal'}}) }}
+                    {{ form_errors(delete_form) }}
+                    {{ form_widget( delete_form.submit ,{'attr': {'class': 'btn  btn-danger'}}) }}
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}

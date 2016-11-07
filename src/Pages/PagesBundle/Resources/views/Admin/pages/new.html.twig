@@ -2,13 +2,25 @@
 
 {% block body %}
     <h2>Pages creation</h2>
-    <div class="col-sm-12">
-        Pages creation
-    </div>
-    <div class="col-sm-12">
-        <a href="{{ path('admin_pages_index') }}" class="btn btn-primary">
-            <i class="icon-chevron-left"></i>
-            Retour
+    <h1>Produits creation</h1>
+
+    <form action="{{ path('admin_pages_new') }}" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            {{ form_label(form.titre) }}
+            {{ form_errors(form.titre) }}
+            {{ form_widget(form.titre,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.contenu) }}
+            {{ form_errors(form.contenu) }}
+            {{ form_widget(form.contenu,{'attr': {'class': 'form-control ckeditor'}}) }}
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="{{ path('admin_pages_index') }}" class="btn btn-info">
+            Back to the list
         </a>
-    </div>
+        {{ form_rest(form) }}
+    </form>
 {% endblock %}

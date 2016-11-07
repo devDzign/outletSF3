@@ -6,22 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProduitsType extends AbstractType
+class TvaType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('nom')
-            ->add('description')
-            ->add('prix')
-            ->add('disponible')
-            ->add('image', MediaType::class)
-            ->add('categorie')
-            ->add('tva');
-      
+        $builder->add('multiplicate')->add('nom')->add('valeur');
     }
     
     /**
@@ -30,7 +22,7 @@ class ProduitsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ecommerce\EcommerceBundle\Entity\Produits'
+            'data_class' => 'Ecommerce\EcommerceBundle\Entity\Tva'
         ));
     }
     
@@ -39,7 +31,7 @@ class ProduitsType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'ecommerce_ecommercebundle_produits';
+        return 'ecommerce_ecommercebundle_tva';
     }
     
     

@@ -3,11 +3,62 @@
 {% block body -%}
     <h1>Produits creation</h1>
 
-    {{ form(form) }}
+    <form action="{{ path('admin_produits_new') }}" method="POST" enctype="multipart/form-data">
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('admin_produits_index') }}" class="btn btn-primary">Back to the list</a>
-        </li>
-    </ul>
+        <div class="form-group">
+            {{ form_label(form.nom) }}
+            {{ form_errors(form.nom) }}
+            {{ form_widget(form.nom,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description,{'attr': {'class': 'form-control ckeditor'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.prix) }}
+            {{ form_errors(form.prix) }}
+            {{ form_widget(form.prix,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.tva) }}
+            {{ form_errors(form.tva) }}
+            {{ form_widget(form.tva,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.categorie) }}
+            {{ form_errors(form.categorie) }}
+            {{ form_widget(form.categorie,{'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="checkbox">
+            <label>
+                {{ form_label(form.disponible) }}
+                {{ form_errors(form.disponible) }}
+                {{ form_widget(form.disponible) }}
+            </label>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                {{ form_label(form.image.file) }}
+                {{ form_errors(form.image.file) }}
+                {{ form_widget(form.image.file,{'attr': {'class': 'form-control'}}) }}
+
+            </div>
+            <div class="form-group">
+                {{ form_label(form.image.alt) }}
+                {{ form_errors(form.image.alt) }}
+                {{ form_widget(form.image.alt,{'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="{{ path('admin_produits_index') }}" class="btn btn-info">
+            Back to the list
+        </a>
+        {{ form_rest(form) }}
+    </form>
+
 {% endblock %}

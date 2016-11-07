@@ -3,9 +3,11 @@
 namespace Ecommerce\EcommerceBundle\Controller\Admin;
 
 use Ecommerce\EcommerceBundle\Entity\Produits;
+use Ecommerce\EcommerceBundle\Form\ProduitsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -40,15 +42,16 @@ class ProduitsController extends Controller
     public function newAction(Request $request)
     {
         $produit = new Produits();
-        $form    = $this->createForm('Ecommerce\EcommerceBundle\Form\ProduitsType', $produit);
+        $form    = $this->createForm(ProduitsType::class, $produit);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'post.new_successfully');
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush($produit);
-            
-            return $this->redirectToRoute('admin_show', array('id' => $produit->getId()));
+    
+            return $this->redirectToRoute('admin_produits_show', array('id' => $produit->getId()));
         }
         
         return $this->render('EcommerceBundle:Admin/produits:new.html.twig', array(
@@ -85,6 +88,7 @@ class ProduitsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_produits_delete', array('id' => $produit->getId())))
             ->setMethod('DELETE')
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
     
@@ -101,14 +105,19 @@ class ProduitsController extends Controller
         $editForm->handleRequest($request);
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this
+                ->getDoctrine()
+                ->getManager()
+                ->flush();
+    
+            $this->addFlash('success', 'post.updated_successfully');
             
             return $this->redirectToRoute('admin_produits_edit', array('id' => $produit->getId()));
         }
-        
-        return $this->render('produits/edit.html.twig', array(
+    
+        return $this->render('@Ecommerce/Admin/produits/edit.html.twig', array(
             'produit' => $produit,
-            'edit_form' => $editForm->createView(),
+            'form_edit' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -116,8 +125,8 @@ class ProduitsController extends Controller
     /**
      * Deletes a produit entity.
      *
-     * @Route("/{id}", name="admin_produits_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="admin_produits_delete")
+     * @Method({"DELETE", "GET"})
      */
     public function deleteAction(Request $request, Produits $produit)
     {
@@ -127,7 +136,9 @@ class ProduitsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($produit);
-            $em->flush($produit);
+            $em->flush();
+    
+            $this->addFlash('success', 'post.deleted_successfully');
         }
         
         return $this->redirectToRoute('admin_produits_index');

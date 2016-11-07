@@ -19,6 +19,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    img_directory: '%kernel.root_dir%/../web/uploads/img'
 twig:
     globals:
         tel: '02 35 00 00 00'

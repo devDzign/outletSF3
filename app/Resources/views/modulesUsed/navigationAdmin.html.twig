@@ -1,4 +1,4 @@
-<div class="col-sm-3">
+<div class="col-sm-3" id="sidebar-wrapper">
 
     <div class="list-group">
         <a href="{{ path('admin_produits_index') }}" class="list-group-item">Produits</a>
@@ -14,5 +14,6 @@
         <a href="{{ path('admin_pages_index') }}" class="list-group-item">Pages</a>
 
     </div>
-
+    {#pour voir le code de developement #}
+    {{ show_source_code(_self) }}
 </div>
