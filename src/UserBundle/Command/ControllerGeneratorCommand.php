@@ -12,7 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Sensio\Bundle\GeneratorBundle\Command\Helper\DialogHelper;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-
+/**
+ * Commande de test de generation de code
+ * Class ControllerGeneratorCommand
+ * @package UserBundle\Command
+ */
 class ControllerGeneratorCommand extends ContainerAwareCommand
 {
     /**
@@ -21,12 +25,12 @@ class ControllerGeneratorCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('user:gen')
+            ->setName('controller:generate')
             ->setDefinition(
                 [
                     new InputOption('controller', '', InputOption::VALUE_REQUIRED, 'Le nom du controller a creer'),
                     new InputOption('bundle', '', InputOption::VALUE_REQUIRED, 'Le bundle dans lequel creer le controlleur'),
-                    new InputOption('basecontroller', '', InputOption::VALUE_REQUIRED, 'S\'il faut ou non heriter du controlleur de base de Symfony2')
+                    new InputOption('basecontroller', '', InputOption::VALUE_REQUIRED, 'S\'il faut ou non heriter du controlleur de base de Symfony2'),
                 ]
             )
             ->setDescription('Genere le code de base pour commencer a utiliser un controlleur')
