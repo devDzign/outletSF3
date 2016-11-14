@@ -37,7 +37,7 @@ class CommandesController extends Controller
     /**
      * Finds and displays a category entity.
      *
-     * @Route("/{id}", name="admin_commandes_show")
+     * @Route("/facture/{id}", name="admin_commandes_show")
      * @Method("GET")
      */
     public function showFactureAction(Commandes $commandes)

@@ -22,24 +22,28 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    public function __construct()
-    {
-        parent::__construct();
-        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
+    
     /**
      * @ORM\OneToMany(targetEntity="Ecommerce\EcommerceBundle\Entity\Commandes", mappedBy="utilisateur", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $commandes;
-
+    protected $commandes;
+    
     /**
      * @ORM\OneToMany(targetEntity="Ecommerce\EcommerceBundle\Entity\UtilisateursAdresses", mappedBy="utilisateur", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $adresses;
+    protected $adresses;
+    
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->adresses  = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
     /**
      * Get id
      *

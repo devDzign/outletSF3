@@ -22,11 +22,11 @@ class Commandes
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="commandes")
      * @ORM\JoinColumn(nullable=true)
      */
-
     private $utilisateur;
 
     /**

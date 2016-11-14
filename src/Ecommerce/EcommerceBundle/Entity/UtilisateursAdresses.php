@@ -20,8 +20,9 @@ class UtilisateursAdresses
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="adresses")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="commandes")
      * @ORM\JoinColumn(nullable=true)
      */
     private $utilisateur;
@@ -86,6 +87,16 @@ class UtilisateursAdresses
     }
     
     /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    
+    /**
      * Set nom
      *
      * @param string $nom
@@ -99,13 +110,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get nom
+     * Get prenom
      *
      * @return string
      */
-    public function getNom()
+    public function getPrenom()
     {
-        return $this->nom;
+        return $this->prenom;
     }
     
     /**
@@ -122,13 +133,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get prenom
+     * Get telephone
      *
      * @return string
      */
-    public function getPrenom()
+    public function getTelephone()
     {
-        return $this->prenom;
+        return $this->telephone;
     }
     
     /**
@@ -145,13 +156,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get telephone
+     * Get adresse
      *
      * @return string
      */
-    public function getTelephone()
+    public function getAdresse()
     {
-        return $this->telephone;
+        return $this->adresse;
     }
     
     /**
@@ -168,13 +179,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get adresse
+     * Get cp
      *
      * @return string
      */
-    public function getAdresse()
+    public function getCp()
     {
-        return $this->adresse;
+        return $this->cp;
     }
     
     /**
@@ -191,13 +202,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get cp
+     * Get pays
      *
      * @return string
      */
-    public function getCp()
+    public function getPays()
     {
-        return $this->cp;
+        return $this->pays;
     }
     
     /**
@@ -214,13 +225,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get pays
+     * Get ville
      *
      * @return string
      */
-    public function getPays()
+    public function getVille()
     {
-        return $this->pays;
+        return $this->ville;
     }
     
     /**
@@ -237,13 +248,13 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get ville
+     * Get complement
      *
      * @return string
      */
-    public function getVille()
+    public function getComplement()
     {
-        return $this->ville;
+        return $this->complement;
     }
     
     /**
@@ -260,35 +271,26 @@ class UtilisateursAdresses
     }
     
     /**
-     * Get complement
+     * Get utilisateur
      *
-     * @return string
+     * @return User
      */
-    public function getComplement()
+    public function getUtilisateur()
     {
-        return $this->complement;
+        return $this->utilisateur;
     }
     
     /**
      * Set utilisateur
      *
      * @param User $utilisateur
-     * @return UtilisateursAdresses
+     *
+     * @return Commandes
      */
     public function setUtilisateur(User $utilisateur = null)
     {
-        $this->utilisateur = $utilisateur;
-        
-        return $this;
-    }
     
-    /**
-     * Get utilisateur
-     *
-     * @return  User
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
+        $this->utilisateur = $utilisateur;
+        return $this;
     }
 }

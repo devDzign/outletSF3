@@ -13,6 +13,9 @@ tva_admin:
 commande_admin:
     resource: "@EcommerceBundle/Controller/Admin/CommandesController.php"
     type:     annotation
+users_admin:
+    resource: "@UserBundle/Controller/Admin/UserController.php"
+    type:     annotation
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation

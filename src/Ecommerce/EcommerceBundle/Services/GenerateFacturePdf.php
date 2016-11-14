@@ -61,10 +61,10 @@ class GenerateFacturePdf
                 'id' => $id
             )
         );
-        
+
         if (!$facture) {
-            
-            $this->session->getFlashBag()->add('error', 'Une erreur est survenue');
+    
+            $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
     
             return new RedirectResponse($this->router->generate($redirectTemplate));
         }
