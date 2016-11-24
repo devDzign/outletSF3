@@ -30,9 +30,9 @@ class UserController extends Controller
      *      name = "facturesPDF"
      *     )
      */
-    public function facturesPDFAction($id)
+    public function facturesPDFAction($id, $facture = 'factures', $flag = true)
     {
-        return $this->get('generate_facture_to_pdf_service')->generateFactureHtmlToPdf($id);
+        return $this->get('generate_facture_to_pdf_service')->generateFactureHtmlToPdf($id, $facture, $flag);
     }
 }
 

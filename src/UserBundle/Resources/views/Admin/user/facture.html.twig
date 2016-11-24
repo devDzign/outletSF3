@@ -26,7 +26,7 @@
                 <td>{{ facture.date|date('d/m/Y') }}</td>
                 <td>{{ facture.commande.prixTTC }} €</td>
                 <td>
-                    <a href="{{ path('facturesPDF', { 'id' : facture.id }) }}" target="_blank">
+                    <a href="{{ path('admin_commandes_show', { 'id' : facture.id }) }}" target="_blank">
                         <span class="glyphicon glyphicon-refresh"></span>
                     </a>
                 </td>

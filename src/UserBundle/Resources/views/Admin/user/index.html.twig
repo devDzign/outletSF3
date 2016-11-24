@@ -24,7 +24,7 @@
                             </a>
                         {% endif %}
                         {% if utilisateur.commandes |length != 0 %}
-                            <a href="{{ path('admin_commandes_show', { 'id': utilisateur.id }) }}"
+                            <a href="{{ path('admin_factures_user', { 'id': utilisateur.id }) }}"
                                title="Consulter les factures">
                                 <span class="glyphicon glyphicon-book"></span>
                             </a>

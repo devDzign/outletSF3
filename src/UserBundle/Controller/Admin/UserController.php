@@ -29,7 +29,7 @@ class UserController extends Controller
         
         return $this->render('@User/Admin/user/index.html.twig', array('users' => $users));
     }
-    
+
     
     /**
      *
@@ -56,7 +56,7 @@ class UserController extends Controller
         if ($route == 'admin_adresses_user')
             return $this->render('@User/Admin/user/adresses.html.twig', array('user' => $user));
         else if ($route == 'admin_factures_user')
-            return $this->render('@User/Admin/user/facture.html.twig', array('user' => $user));
+            return $this->render('@User/Admin/user/facture.html.twig', array('user' => $user, 'flag' => false));
         else
             throw $this->createNotFoundException('La vue n\'existe pas.');
     }
