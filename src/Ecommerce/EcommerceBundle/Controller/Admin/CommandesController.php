@@ -50,8 +50,8 @@ class CommandesController extends Controller
             
             return $this->redirectToRoute('admin_commandes_index');
         }
-        
-        return $this->get('generate_facture_to_pdf_service')->generateFactureHtmlToPdf($facture->getId(), 'admin_commandes_index');
+    
+        return $this->get('generate_facture_to_pdf_service')->generateFactureHtmlToPdf($facture->getId(), 'admin_commandes_index', false);
         
     }
 }

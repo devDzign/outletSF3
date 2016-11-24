@@ -6,6 +6,7 @@ use Ecommerce\EcommerceBundle\Entity\Tva;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -51,8 +52,8 @@ class TvaController extends Controller
             
             return $this->redirectToRoute('admin_tva_show', array('id' => $tva->getId()));
         }
-        
-        return $this->render('tva/new.html.twig', array(
+    
+        return $this->render('@Ecommerce/Admin/tva/new.html.twig', array(
             'tva' => $tva,
             'form' => $form->createView(),
         ));
@@ -69,7 +70,7 @@ class TvaController extends Controller
         $deleteForm = $this->createDeleteForm($tva);
         
         return $this->render('@Ecommerce/Admin/tva/show.html.twig', array(
-            'tva' => $tva,
+            'entity' => $tva,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -84,10 +85,10 @@ class TvaController extends Controller
     private function createDeleteForm(Tva $tva)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tva_delete', array('id' => $tva->getId())))
+            ->setAction($this->generateUrl('admin_tva_delete', array('id' => $tva->getId())))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm();;
+            ->getForm();
     }
     
     /**

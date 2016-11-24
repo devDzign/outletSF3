@@ -33,8 +33,9 @@ class GenerateFacturePdf
     
     /**
      * GetReference constructor.
+     *
      * @param EntityManager $em
-     * @param TokenStorage $tokenStorage
+     * @param TokenStorage  $tokenStorage
      */
     public function __construct(
         EntityManager $em,
@@ -52,16 +53,27 @@ class GenerateFacturePdf
         $this->templating   = $templating;
     }
     
-    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures')
+    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures', $flag = true)
     {
-        $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
-            array(
-                'utilisateur' => $this->tokenStorage->getToken()->getUser(),
-                'valider' => 1,
-                'id' => $id
-            )
-        );
-
+    
+        if ($flag) {
+            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                array(
+                    'utilisateur' => $this->tokenStorage->getToken()->getUser(),
+                    'valider' => 1,
+                    'id' => $id
+                )
+            );
+        } else {
+        
+            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                array(
+                    'valider' => 1,
+                    'id' => $id
+                )
+            );
+        }
+        
         if (!$facture) {
     
             $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');

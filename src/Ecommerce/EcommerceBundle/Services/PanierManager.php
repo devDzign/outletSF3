@@ -131,7 +131,6 @@ class PanierManager
 
     public function countProductPanier()
     {
-        dump($this->getPanier());
         return count($this->getPanier());
     }
     

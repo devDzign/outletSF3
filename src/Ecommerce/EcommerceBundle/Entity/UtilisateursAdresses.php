@@ -22,7 +22,7 @@ class UtilisateursAdresses
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="commandes", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $utilisateur;

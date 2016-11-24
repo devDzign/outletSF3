@@ -1,40 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends '::layout/layoutAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Tva</h1>
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ tva.id }}</td>
-        </tr>
-        <tr>
-            <th>Multiplicate</th>
-            <td>{{ tva.multiplicate }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ tva.nom }}</td>
-        </tr>
-        <tr>
-            <th>Valeur</th>
-            <td>{{ tva.valeur }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="panel panel-success">
 
-    <ul>
-        <li>
-            <a href="{{ path('tva_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('tva_edit', { 'id': tva.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <div class="panel-heading">Fiche Tva</div>
+        <div class="panel-body">
+            <p>Tva Id : {{ entity.id }}</p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">{{ entity.nom }}</li>
+            <li class="list-group-item">{{ entity.multiplicate }}</li>
+            <li class="list-group-item">{{ entity.valeur }}</li>
+        </ul>
+        <div class="panel-footer">
+
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_tva_index') }}" class="btn btn-success">
+                        Back to the list
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    <a href="{{ path('admin_tva_edit', { 'id': entity.id }) }}" class="btn btn-info">
+                        Edit
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    {{ form_start(delete_form, {'attr': {'class': 'form-horizontal'}}) }}
+                    {{ form_errors(delete_form) }}
+                    {{ form_widget( delete_form.submit ,{'attr': {'class': 'btn  btn-danger'}}) }}
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}

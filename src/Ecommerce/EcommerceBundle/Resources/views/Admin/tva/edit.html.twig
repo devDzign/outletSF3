@@ -1,21 +1,57 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block body %}#}
+    {#<h1>Tva edit</h1>#}
+
+    {#{{ form_start(edit_form) }}#}
+    {#{{ form_widget(edit_form) }}#}
+    {#<input type="submit" value="Edit"/>#}
+    {#{{ form_end(edit_form) }}#}
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('tva_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#{{ form_start(delete_form) }}#}
+            {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    {#</ul>#}
+{#{% endblock %}#}
+
+
+{% extends 'layout/layoutAdmin.html.twig' %}
 
 {% block body %}
     <h1>Tva edit</h1>
 
-    {{ form_start(edit_form) }}
-    {{ form_widget(edit_form) }}
-    <input type="submit" value="Edit"/>
-    {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('tva_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <form action="{{ path('admin_tva_edit', {'id': tva.id}) }}" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            {{ form_label(form_edit.nom) }}
+            {{ form_errors(form_edit.nom) }}
+            {{ form_widget(form_edit.nom,{'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form_edit.multiplicate) }}
+            {{ form_errors(form_edit.multiplicate) }}
+            {{ form_widget(form_edit.multiplicate,{'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form_edit.valeur) }}
+            {{ form_errors(form_edit.valeur) }}
+            {{ form_widget(form_edit.valeur,{'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="{{ path('admin_tva_index') }}" class="btn btn-info">
+            Back to the list
+        </a>
+        {{ form_rest(form_edit) }}
+    </form>
+
 {% endblock %}
