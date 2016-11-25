@@ -63,7 +63,7 @@ class CommandesController extends Controller
             throw $this->createNotFoundException('La commande n\'existe pas');
         
         $commande->setValider(1);
-        $commande->setReference($this->get('get_reference_facture_service')->reference()); 
+        $commande->setReference($this->get('get_reference_facture_service')->reference());
         $em->flush();
         
         $session = $request->getSession();
@@ -72,7 +72,10 @@ class CommandesController extends Controller
         $session->remove('commande');
     
     
-        // envoie de mail de confirmation 
+        // envoie de mail de confirmation
+        $commande = $em->getRepository('EcommerceBundle:Commandes')->find($id);
+        $mail     = $this->get('send.mail.service');
+        $mail->commandeConfirm($commande);;
         $session->getFlashBag()->add('success', 'Votre commande est validé avec succès');
         
         return $this->redirectToRoute('produits');

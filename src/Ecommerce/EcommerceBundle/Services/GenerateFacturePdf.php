@@ -46,20 +46,20 @@ class GenerateFacturePdf
     )
     {
         $this->em           = $em;
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStorage = $tokenStorage->getToken();
         $this->session      = new Session();
         $this->html2pdf     = $html2pdf->create();
         $this->router       = $router;
         $this->templating   = $templating;
     }
     
-    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures', $flag = true)
+    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures')
     {
     
-        if ($flag) {
+        if (!in_array('ROLE_ADMIN', $this->tokenStorage->getRoles())) {
             $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
                 array(
-                    'utilisateur' => $this->tokenStorage->getToken()->getUser(),
+                    'utilisateur' => $this->tokenStorage->getUser(),
                     'valider' => 1,
                     'id' => $id
                 )

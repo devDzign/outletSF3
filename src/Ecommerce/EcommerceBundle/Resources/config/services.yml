@@ -11,6 +11,7 @@ parameters:
     redirect_listner_class: Ecommerce\EcommerceBundle\EventListener\RedirectionListener
     utilisateurs_adresses_type.class: Ecommerce\EcommerceBundle\Form\UtilisateursAdressesType
     utilisateurs_adresses_entity.class: Ecommerce\EcommerceBundle\Entity\UtilisateursAdresses
+    send.mail.service.class: Ecommerce\EcommerceBundle\Services\MailService
     symfony.form.class: Symfony\Component\Form\Form
 
 services:
@@ -77,3 +78,7 @@ services:
     entuty_media_service:
         class: Ecommerce\EcommerceBundle\Entity\Media
         arguments: ["%img_directory%"]
+
+    send.mail.service:
+        class: "%send.mail.service.class%"
+        arguments: ["@mailer","@templating"]
