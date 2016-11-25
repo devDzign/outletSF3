@@ -72,6 +72,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    encryption: "%mailer_encryption%"
     spool:     { type: memory }
 
 doctrine_migrations:
@@ -90,6 +91,16 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: UserBundle\Entity\User
+    resetting:
+        email:
+            template:   "@FOSUser/Resetting/password_already_requested.html.twig"
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address:        registration@example.com
+                sender_name:    Registration Demo
+
 
 ensepar_html2pdf:
     orientation: P

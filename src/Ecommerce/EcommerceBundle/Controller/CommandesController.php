@@ -70,7 +70,9 @@ class CommandesController extends Controller
         $session->remove('adresse');
         $session->remove('panier');
         $session->remove('commande');
-        
+    
+    
+        // envoie de mail de confirmation 
         $session->getFlashBag()->add('success', 'Votre commande est validé avec succès');
         
         return $this->redirectToRoute('produits');
