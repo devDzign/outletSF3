@@ -100,8 +100,6 @@ fos_user:
             from_email:
                 address:        registration@example.com
                 sender_name:    Registration Demo
-
-
 ensepar_html2pdf:
     orientation: P
     format: A4
@@ -109,3 +107,20 @@ ensepar_html2pdf:
     unicode: true
     encoding: UTF-8
     margin: [10,15,10,15]
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        cache: ~
+        # the name of the "filter set"
+        produitThumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [300, 150], mode: inset }
+        produit:
+            quality: 75
+            filters:
+                thumbnail: { size: [470, 310], mode: inset }

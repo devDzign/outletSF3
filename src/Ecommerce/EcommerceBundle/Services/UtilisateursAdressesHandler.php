@@ -54,7 +54,6 @@ class UtilisateursAdressesHandler
         $this->em                   = $em;
         $this->security             = $security;
         $this->utilisateursAdresses =  new UtilisateursAdresses();
-        //$this->form                 = $form->createBuilder(UtilisateursAdressesType::class,$this->utilisateursAdresses)->getForm();
         $this->former           = $former;
         $this->evenvtDispatcher = $evenvtDispatcher;
 

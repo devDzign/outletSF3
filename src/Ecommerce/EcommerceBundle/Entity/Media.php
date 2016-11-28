@@ -17,17 +17,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Media
 {
-    
     /**
      * @ORM\Column(type="string",length=255)
      * @Assert\NotBlank
      */
     public $alt;
-    /**
-     * @var \DateTime
-     *
-     * @ORM\COlumn(name="updated_at",type="datetime", nullable=true)
-     */
     /**
      * @ORM\Column(type="string",length=255, nullable=true)
      */
