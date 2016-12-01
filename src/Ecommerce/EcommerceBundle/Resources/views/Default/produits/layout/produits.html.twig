@@ -16,7 +16,7 @@
                         {% for produit in produits %}
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <img src="{{ produit.image.getAssetPath() | imagine_filter('produits') }}"
+                                    <img src="{{ produit.image.getAssetPath | imagine_filter('produit') }}"
                                          alt="{{ produit.image.alt }}"
                                          width="300" height="300">
                                     <div class="caption">
