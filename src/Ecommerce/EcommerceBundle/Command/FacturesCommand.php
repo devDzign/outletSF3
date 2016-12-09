@@ -53,3 +53,5 @@ class FacturesCommand extends ContainerAwareCommand
             // the "--help" option
             ->setHelp("This command allows you to create users...");
     }
+    
+}
