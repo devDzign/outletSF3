@@ -53,40 +53,43 @@ class GenerateFacturePdf
         $this->templating   = $templating;
     }
     
-    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures')
+    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures', $facture = null)
     {
     
-        if (!in_array('ROLE_ADMIN', $this->tokenStorage->getRoles())) {
-            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
-                array(
-                    'utilisateur' => $this->tokenStorage->getUser(),
-                    'valider' => 1,
-                    'id' => $id
-                )
-            );
-        } else {
-        
-            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
-                array(
-                    'valider' => 1,
-                    'id' => $id
-                )
-            );
-        }
-        
         if (!$facture) {
-    
-            $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
-    
-            return new RedirectResponse($this->router->generate($redirectTemplate));
-        }
+            if (!in_array('ROLE_ADMIN', $this->tokenStorage->getRoles())) {
+                $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                    array(
+                        'utilisateur' => $this->tokenStorage->getUser(),
+                        'valider' => 1,
+                        'id' => $id
+                    )
+                );
+            } else {
+            
+                $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                    array(
+                        'valider' => 1,
+                        'id' => $id
+                    )
+                );
+            }
         
+            if (!$facture) {
+            
+                $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
+            
+                return new RedirectResponse($this->router->generate($redirectTemplate));
+            }
+        }
+    
+    
         $html = $this->templating->render('UserBundle:Default:layout/facturePDF.html.twig', array('facture' => $facture));
         
         $this->html2pdf->pdf->SetAuthor('Shop2Shop');
         $this->html2pdf->pdf->SetTitle('Facture ' . $facture->getReference());
-        $this->html2pdf->pdf->SetSubject('Facture DevAndClick');
-        $this->html2pdf->pdf->SetKeywords('facture,devandclick');
+        $this->html2pdf->pdf->SetSubject('Facture Shop2Shop');
+        $this->html2pdf->pdf->SetKeywords('facture,Shop2Shop');
         $this->html2pdf->pdf->SetDisplayMode('real');
         $this->html2pdf->writeHTML($html);
         $this->html2pdf->Output('Facture.pdf');
