@@ -44,7 +44,7 @@ class CommandesController extends Controller
     {
         $em      = $this->getDoctrine()->getManager();
         $facture = $em->getRepository('EcommerceBundle:Commandes')->find($commandes->getId());
-        
+    
         if (!$facture) {
             $this->addFlash('error', 'Une erreur est survenue pdf');
             

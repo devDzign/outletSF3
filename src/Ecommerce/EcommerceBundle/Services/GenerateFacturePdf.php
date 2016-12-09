@@ -53,34 +53,41 @@ class GenerateFacturePdf
         $this->templating   = $templating;
     }
     
-    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures', $facture = null)
+    public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures')
     {
-
-        if (!$facture) {
-            if (!in_array('ROLE_ADMIN', $this->tokenStorage->getRoles())) {
-                $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
-                    array(
-                        'utilisateur' => $this->tokenStorage->getUser(),
-                        'valider' => 1,
-                        'id' => $id
-                    )
-                );
-            } else {
-
-                $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
-                    array(
-                        'valider' => 1,
-                        'id' => $id
-                    )
-                );
-            }
+        $facture   = null;
+        $role      = [];
+        $rolesUser = $this->tokenStorage->getRoles();
+        foreach ($rolesUser as $index => $item) {
+            $roles[] = $item->getRole();
+        }
     
-            if (!$facture) {
+        if (!in_array('ROLE_ADMIN', $roles)) {
         
-                $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
         
-                return new RedirectResponse($this->router->generate($redirectTemplate));
-            }
+            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                array(
+                    'utilisateur' => $this->tokenStorage->getUser(),
+                    'valider' => 1,
+                    'id' => $id
+                )
+            );
+        } else {
+        
+            $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
+                array(
+                    'valider' => 1,
+                    'id' => $id
+                )
+            );
+        }
+    
+    
+        if (!$facture) {
+        
+            $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
+        
+            return new RedirectResponse($this->router->generate($redirectTemplate));
         }
     
     
