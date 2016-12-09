@@ -22,23 +22,25 @@ class FacturesCommand extends ContainerAwareCommand
     {
         
         $date = new \DateTime();
-        
         $em       = $this->getContainer()->get('doctrine.orm.entity_manager');
         $factures = $em->getRepository('EcommerceBundle:Commandes')->byDateCommand($input->getArgument('date'));
+    
         $output->writeln(count($factures) . ' facture(s).');
-        
+        $path = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/';
+    
+       
+
         if (count($factures) > 0) {
-            $dir = $date->format('d-m-Y h-i-s');
-            mkdir('Facturation/' . $dir);
-            
+            $dir  = $date->format('d-m-Y_h-i-s');
+            $path = $path . 'Facturations/' . $dir;
+            mkdir($path);
+         
             foreach ($factures as $facture) {
-                $this->getContainer()->get('generate_facture_to_pdf_service')->generateFactureHtmlToPdf($facture->getId(), 'factures', $facture)
-                    ->Ou('facturation/' . $dir . '/facture' . $facture->getReference() . '.pdf', 'F');
+                $this->getContainer()->get('generate_facture_to_pdf_service')->generateFactureCommand($facture)
+                    ->Output($path . '/facture-' . $facture->getReference() . '.pdf', 'F');
+
             }
             
-            
-            // retrieve the argument value using getArgument()
-            $output->writeln('Username: ' . $input->getArgument('username'));
         }
         
     }
@@ -47,11 +49,9 @@ class FacturesCommand extends ContainerAwareCommand
     {
         $this
             ->setName('ecommerce:facture')
-            ->setDescription('Creates new users.')
-            ->addArgument('data', InputArgument::REQUIRED, 'Date pour laquel vous souhaitez récuperer les factures')
-            // the full command description shown when running the command with
-            // the "--help" option
-            ->setHelp("This command allows you to create users...");
+            ->setDescription('Ceci est test')
+            ->addArgument('date', InputArgument::OPTIONAL, 'Date pour laquel vous souhaitez récuperer les factures')
+            ->setHelp("This command allows you to create factures...");
     }
     
 }

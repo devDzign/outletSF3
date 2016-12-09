@@ -55,7 +55,7 @@ class GenerateFacturePdf
     
     public function generateFactureHtmlToPdf($id, $redirectTemplate = 'factures', $facture = null)
     {
-    
+
         if (!$facture) {
             if (!in_array('ROLE_ADMIN', $this->tokenStorage->getRoles())) {
                 $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
@@ -66,7 +66,7 @@ class GenerateFacturePdf
                     )
                 );
             } else {
-            
+
                 $facture = $this->em->getRepository('EcommerceBundle:Commandes')->findOneBy(
                     array(
                         'valider' => 1,
@@ -74,30 +74,41 @@ class GenerateFacturePdf
                     )
                 );
             }
-        
+    
             if (!$facture) {
-            
+        
                 $this->session->getFlashBag()->add('errors', 'Une erreur est survenue sur service generateur');
-            
+        
                 return new RedirectResponse($this->router->generate($redirectTemplate));
             }
         }
     
     
-        $html = $this->templating->render('UserBundle:Default:layout/facturePDF.html.twig', array('facture' => $facture));
+        $this->calculeFacture($facture);
+        $this->html2pdf->Output('Facture.pdf');
+        $response = new Response();
+        $response->headers->set('Content-type', 'application/pdf');
+    
+        return $response;
+    }
+    
+    private function calculeFacture($facture)
+    {
         
+        $html = $this->templating->render('UserBundle:Default:layout/facturePDF.html.twig', array('facture' => $facture));
         $this->html2pdf->pdf->SetAuthor('Shop2Shop');
         $this->html2pdf->pdf->SetTitle('Facture ' . $facture->getReference());
         $this->html2pdf->pdf->SetSubject('Facture Shop2Shop');
         $this->html2pdf->pdf->SetKeywords('facture,Shop2Shop');
         $this->html2pdf->pdf->SetDisplayMode('real');
         $this->html2pdf->writeHTML($html);
-        $this->html2pdf->Output('Facture.pdf');
         
-        $response = new Response();
-        $response->headers->set('Content-type', 'application/pdf');
-        
-        return $response;
+        return $this->html2pdf;
+    }
+    
+    public function generateFactureCommand($facture)
+    {
+        return $this->calculeFacture($facture);
     }
     
 }
