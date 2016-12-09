@@ -16,9 +16,15 @@
             <li>
                 <a href="#">Mes adresses</a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('admin_home_index') }}">Admin</a>
+                </li>
+            {% endif %}
             <li>
                 <a href="{{ path('fos_user_security_logout') }}">deconnexion</a>
             </li>
+
         {% else %}
            {% include '@User/Default/modulesUsed/layout/utilisateurs.html.twig' %}
         {% endif %}

@@ -16,6 +16,9 @@ commande_admin:
 users_admin:
     resource: "@UserBundle/Controller/Admin/UserController.php"
     type:     annotation
+home_admin:
+    resource: "@EcommerceBundle/Controller/Admin/AdminController.php"
+    type:     annotation
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation

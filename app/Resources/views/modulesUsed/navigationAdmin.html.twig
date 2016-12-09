@@ -14,6 +14,12 @@
     <div class="list-group">
         <a href="{{ path('admin_pages_index') }}" class="list-group-item">Pages</a>
     </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="list-group">
+            <a href="{{ path('admin_home_index') }}" class="list-group-item">Admin</a>
+        </div>
+    {% endif %}
     {#pour voir le code de developement #}
     {{ show_source_code(_self) }}
 </div>
