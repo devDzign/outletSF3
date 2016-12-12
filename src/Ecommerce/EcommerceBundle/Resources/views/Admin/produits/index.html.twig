@@ -1,51 +1,81 @@
 {% extends '::layout/layoutAdmin.html.twig' %}
 
 {% block body -%}
-    <h1>Pages list</h1>
 
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Disponible</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in produits %}
-            <tr>
-                <td>{{ entity.nom }}</td>
-                <td>{{ entity.prix }}</td>
-                <td>{{ entity.disponible }}</td>
+    <div class="col-sm-12">
+        <ul>
 
-                <td>
-                    <a href="{{ path('admin_produits_show', { 'id': entity.id }) }}" class="btn btn-success">
-                        <span class="glyphicon glyphicon-book"></span>
-                    </a>
-                    |
-                    <a href="{{ path('admin_produits_edit', { 'id': entity.id }) }}" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                    {#|#}
-                    {#<form action="{{ path('admin_pages_delete', { 'id': entity.id }) }}" method="POST" enctype="multipart/form-data">#}
-                    {#<button type="submit" class="btn btn-danger">#}
-                    {#<span class="glyphicon glyphicon-remove"></span>#}
-                    {#</button>#}
-                    {#</form>#}
+            <a href="{{ path('admin_produits_new') }}" class="btn btn-block btn-primary">
+                <i class="icon-plus"></i> Nouvelle page
+            </a>
+
+        </ul>
+        <div class="box box-danger box-solid">
+            <div class="box-header">
+                <h3 class="box-title">Data Table With Full Features</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                            title="Remove">
+                        <i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Disponible</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in produits %}
+                        <tr>
+                            <td>{{ entity.nom }}</td>
+                            <td>{{ entity.prix }}</td>
+                            <td>{{ entity.disponible }}</td>
+
+                            <td>
+                                <a href="{{ path('admin_produits_show', { 'id': entity.id }) }}"
+                                   class="btn btn-success">
+                                    <span class="glyphicon glyphicon-book"></span>
+                                </a>
+                                |
+                                <a href="{{ path('admin_produits_edit', { 'id': entity.id }) }}"
+                                   class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                                {#|#}
+                                {#<form action="{{ path('admin_pages_delete', { 'id': entity.id }) }}" method="POST" enctype="multipart/form-data">#}
+                                {#<button type="submit" class="btn btn-danger">#}
+                                {#<span class="glyphicon glyphicon-remove"></span>#}
+                                {#</button>#}
+                                {#</form>#}
 
 
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-    <ul>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Disponible</th>
+                        <th>Actions</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
 
-        <a href="{{ path('admin_produits_new') }}" class="btn btn-block btn-primary">
-            <i class="icon-plus"></i> Nouvelle page
-        </a>
-
-    </ul>
 {% endblock %}
