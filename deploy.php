@@ -1,26 +1,44 @@
 <?php
 namespace Deployer;
-
 require 'recipe/symfony3.php';
 
 // Configuration
 
-/* Dans notre exemple, on a qu'un serveur. On le nomme localhost car on déploie directement sur ce serveur.
- * Ce qui explique l’utilisation de la fonction localServer() sinon il faut utiliser la fonction server().
- * On le met dans la catégorie "prod" car il s'agit d'un serveur de production.
- * On indique le répertoire où doit être déployé le projet. */
-localServer('localhost')
-    ->stage('prod')
-    ->env('deploy_path', '/var/www/outletSF3');
+set('ssh_type', 'native');
+set('ssh_multiplexing', true);
 
-/* On utilise Git pour récupérer le projet : on indique l'URL du dépôt du projet */
 set('repository', 'https://github.com/devDzign/outletSF3.git');
 
-/* Ce qui vient par la suite est optionnel. Il existe plein de variables personnalisables (Cf documentation).
- * Ici, cela permet de demander à Deployer de ne pas utiliser la commande sudo pour changer les droits des fichiers.
- * C'est utile par exemple quand cette commande n'est pas disponible sur le serveur */
-set('writable_use_sudo', false);
+add('shared_files', []);
+add('shared_dirs', []);
 
-/* A chaque déploiement, l'ancienne version est archivée.
- * Cette variable permet d'indiquer le nombre maximum de version que l'on souhaite conserver. */
-set('keep_releases', 5);
+add('writable_dirs', []);
+
+// Servers
+
+server('deployersf', 'ssh-deployersf.alwaysdata.net')
+    ->user('deployersf')
+    ->password('mourad__2008')
+    ->set('deploy_path', '/var/www/outletSF3')
+    ->pty(true);
+
+
+// Tasks
+
+desc('Restart PHP-FPM service');
+task(
+    'php-fpm:restart',
+    function () {
+        // The user must have rights for restart service
+        // /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
+        run('sudo systemctl restart php-fpm.service');
+    }
+);
+after('deploy:symlink', 'php-fpm:restart');
+
+// [Optional] if deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
+
+// Migrate database before symlink new release.
+
+before('deploy:symlink', 'database:migrate');
