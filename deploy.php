@@ -2,7 +2,7 @@
 namespace Deployer;
 require 'recipe/symfony3.php';
 
-// Configuration
+// Configuration cool
 
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
