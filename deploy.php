@@ -15,7 +15,8 @@ add('writable_dirs', []);
 
 // Servers
 
-server('prod', 'ssh-deployersf.alwaysdata.net')
+localServer('localhost')
+    ->stage('prod')
     ->set('deploy_path', '/home/deployersf/www/outletSF3')
     ->pty(true);
 
