@@ -19,7 +19,7 @@ add('writable_dirs', []);
 server('prod', 'ssh-deployersf.alwaysdata.net')
     ->user('deployersf')
     ->password('mourad__2008')
-    ->set('deploy_path', '/var/www/outletSF3')
+    ->set('deploy_path', '/home/deployersf/www/outletSF3')
     ->pty(true);
 
 
