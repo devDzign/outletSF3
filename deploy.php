@@ -1,6 +1,7 @@
 <?php
 namespace Deployer;
-require 'recipe/symfony.php';
+
+require 'recipe/symfony3.php';
 
 // Configuration
 
@@ -10,7 +11,7 @@ require 'recipe/symfony.php';
  * On indique le répertoire où doit être déployé le projet. */
 localServer('localhost')
     ->stage('prod')
-    ->env('deploy_path', '/web/vhosts/deployersf.alwaysdata.net');
+    ->env('deploy_path', '/var/www/outletSF3');
 
 /* On utilise Git pour récupérer le projet : on indique l'URL du dépôt du projet */
 set('repository', 'https://github.com/devDzign/outletSF3.git');
