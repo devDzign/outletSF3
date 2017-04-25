@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new Misd\GuzzleBundle\MisdGuzzleBundle(),
+//            new Misd\GuzzleBundle\MisdGuzzleBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ecommerce\EcommerceBundle\EcommerceBundle(),
