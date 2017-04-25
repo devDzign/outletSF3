@@ -1,0 +1,30 @@
+McTva:
+    type: entity
+    table: mc_tva
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        multiplicate:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        nom:
+            type: string
+            nullable: false
+            length: 125
+            options:
+                fixed: false
+        valeur:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+    lifecycleCallbacks: {  }

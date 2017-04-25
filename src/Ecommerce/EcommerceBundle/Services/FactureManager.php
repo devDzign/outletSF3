@@ -31,13 +31,11 @@ class FactureManager
     
     /**
      * PanierManager constructor.
+     *
      * @param EntityManager $em
-     * @param RequestStack $request
+     * @param RequestStack  $request
      */
-    public function __construct(
-        EntityManager $em,
-        RequestStack $request
-    )
+    public function __construct(EntityManager $em, RequestStack $request)
     {
         $this->em                             = $em;
         $this->repositoryProduit              = $this->em->getRepository('EcommerceBundle:Produits');
@@ -78,23 +76,28 @@ class FactureManager
                                                                   'prixHT' => round($produit->getPrix(), 2),
                                                                   'prixTTC' => round($produit->getPrix() / $produit->getTva()->getMultiplicate(), 2));
         }
-        
-        $this->commande['livraison']   = array('prenom' => $livraison->getPrenom(),
-                                               'nom' => $livraison->getNom(),
-                                               'telephone' => $livraison->getTelephone(),
-                                               'adresse' => $livraison->getAdresse(),
-                                               'cp' => $livraison->getCp(),
-                                               'ville' => $livraison->getVille(),
-                                               'pays' => $livraison->getPays(),
-                                               'complement' => $livraison->getComplement());
-        $this->commande['facturation'] = array('prenom' => $facturation->getPrenom(),
-                                               'nom' => $facturation->getNom(),
-                                               'telephone' => $facturation->getTelephone(),
-                                               'adresse' => $facturation->getAdresse(),
-                                               'cp' => $facturation->getCp(),
-                                               'ville' => $facturation->getVille(),
-                                               'pays' => $facturation->getPays(),
-                                               'complement' => $facturation->getComplement());
+
+        $this->commande['livraison'] = array(
+            'prenom'     => $livraison->getPrenom(),
+            'nom'        => $livraison->getNom(),
+            'telephone'  => $livraison->getTelephone(),
+            'adresse'    => $livraison->getAdresse(),
+            'cp'         => $livraison->getCp(),
+            'ville'      => $livraison->getVille(),
+            'pays'       => $livraison->getPays(),
+            'complement' => $livraison->getComplement(),
+        );
+
+        $this->commande['facturation'] = array(
+            'prenom'     => $facturation->getPrenom(),
+            'nom'        => $facturation->getNom(),
+            'telephone'  => $facturation->getTelephone(),
+            'adresse'    => $facturation->getAdresse(),
+            'cp'         => $facturation->getCp(),
+            'ville'      => $facturation->getVille(),
+            'pays'       => $facturation->getPays(),
+            'complement' => $facturation->getComplement(),
+        );
         
         $this->commande['prixHT']  = round($totalHT, 2);
         $this->commande['prixTTC'] = round($totalTTC, 2);

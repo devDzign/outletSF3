@@ -36,9 +36,9 @@ class UtilisateursAdressesHandler
     /**
      * UtilisateursAdressesHandler constructor.
      *
-     * @param RequestStack $request
+     * @param RequestStack  $request
      * @param EntityManager $em
-     * @param TokenStorage $security
+     * @param TokenStorage  $security
      */
     public function __construct(
         FormFactory $form,
@@ -53,10 +53,10 @@ class UtilisateursAdressesHandler
         $this->request              = $request->getMasterRequest();
         $this->em                   = $em;
         $this->security             = $security;
-        $this->utilisateursAdresses =  new UtilisateursAdresses();
-        $this->former           = $former;
-        $this->evenvtDispatcher = $evenvtDispatcher;
-
+        $this->utilisateursAdresses = new UtilisateursAdresses();
+        $this->former               = $former;
+        $this->evenvtDispatcher     = $evenvtDispatcher;
+        
     }
 
     /**

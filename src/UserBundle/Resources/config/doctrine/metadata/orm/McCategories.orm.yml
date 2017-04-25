@@ -1,0 +1,35 @@
+McCategories:
+    type: entity
+    table: mc_categories
+    uniqueConstraints:
+        UNIQ_2B5845A63DA5256D:
+            columns:
+                - image_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 125
+            options:
+                fixed: false
+    manyToOne:
+        image:
+            targetEntity: McMedia
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                image_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

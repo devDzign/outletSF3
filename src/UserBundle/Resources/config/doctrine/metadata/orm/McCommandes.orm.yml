@@ -1,0 +1,46 @@
+McCommandes:
+    type: entity
+    table: mc_commandes
+    indexes:
+        IDX_9FDCBAF7FB88E14F:
+            columns:
+                - utilisateur_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        valider:
+            type: boolean
+            nullable: false
+        date:
+            type: datetime
+            nullable: false
+        reference:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        commande:
+            type: array
+            nullable: false
+            length: null
+            options:
+                fixed: false
+    manyToOne:
+        utilisateur:
+            targetEntity: FosUser
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                utilisateur_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

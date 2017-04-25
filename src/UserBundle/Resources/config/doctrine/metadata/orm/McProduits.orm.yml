@@ -1,0 +1,76 @@
+McProduits:
+    type: entity
+    table: mc_produits
+    indexes:
+        IDX_BCF35BE2BCF5E72D:
+            columns:
+                - categorie_id
+        IDX_BCF35BE24D79775F:
+            columns:
+                - tva_id
+    uniqueConstraints:
+        UNIQ_BCF35BE23DA5256D:
+            columns:
+                - image_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 125
+            options:
+                fixed: false
+        description:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        prix:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        disponible:
+            type: boolean
+            nullable: false
+    manyToOne:
+        image:
+            targetEntity: McMedia
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                image_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tva:
+            targetEntity: McTva
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tva_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        categorie:
+            targetEntity: McCategories
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categorie_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

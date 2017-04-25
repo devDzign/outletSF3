@@ -4,6 +4,7 @@ namespace Pages\PagesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PagesController extends Controller
 {
@@ -18,14 +19,21 @@ class PagesController extends Controller
      */
     public function pageAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em   = $this->getDoctrine()->getManager();
         $page = $em->getRepository('PagesBundle:Pages')->find($id);
+        $data = $em->getRepository('PagesBundle:Pages')->getPage($id);
 
-        if(!pages){
+        $response = new JsonResponse();
+
+
+        $data = \GuzzleHttp\json_encode($data);
+
+
+        if (!$page) {
             throw $this->createNotFoundException('La page n\'est pas trouvée');
         }
 
-        return $this->render('PagesBundle:Default/layout:pages.html.twig', ['page' => $page]);
+        return $this->render('PagesBundle:Default/layout:pages.html.twig', ['page' => $page, 'data' => $data]);
     }
 
     /**

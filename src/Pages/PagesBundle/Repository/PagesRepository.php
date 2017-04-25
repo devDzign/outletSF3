@@ -10,4 +10,14 @@ namespace Pages\PagesBundle\Repository;
  */
 class PagesRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getPage($id)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
 }

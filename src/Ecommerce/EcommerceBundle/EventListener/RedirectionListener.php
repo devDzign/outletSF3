@@ -45,8 +45,8 @@ class RedirectionListener
         
         if ($route == 'livraison' || $route == 'validation') {
             if ($this->panierManager->getSession()->has('panier')) {
-                
-                if ($this->panierManager->countProductPanier() == 0){
+
+                if ($this->panierManager->countProductPanier() === 0) {
                     $event->setResponse(new RedirectResponse($this->router->generate('panier')));
                 }
 
